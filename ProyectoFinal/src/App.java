@@ -9,7 +9,7 @@ import UI.Dashboard;
 public class App {
 
     private static final String DB_URL = 
-            "jdbc:mysql://localhost:3306/biblioteca";
+            "jdbc:mysql:aws://localhost:3306/biblioteca";
     
     private static final String DB_USERNAME = "root";
     

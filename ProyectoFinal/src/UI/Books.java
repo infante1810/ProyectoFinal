@@ -1,7 +1,14 @@
 package UI;
 
+import App;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import static UI.Dashboard.content;
 import java.awt.BorderLayout;
 
@@ -17,7 +24,22 @@ public class Books extends javax.swing.JPanel {
      */
     public Books() {
         initComponents();
-       
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTable1.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            
+            modelo.addColumn("Código");
+            modelo.addColumn("Producto");
+            modelo.addColumn("Precio");
+            modelo.addColumn("Cantidad");
+            
+
+        } catch (Exception ex) {
+            System.err.println(ex.toString());
+        }
     }
 
     /**
@@ -299,6 +321,13 @@ public class Books extends javax.swing.JPanel {
         panel.setBackground(new Color(16,152,173));
     }
     
+    private void cargarDatos(){
+        try(Connection connection = App.getConnection()){
+            
+        }catch(Exception e){
+            
+        }
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

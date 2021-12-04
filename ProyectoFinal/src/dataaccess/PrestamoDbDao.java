@@ -24,7 +24,7 @@ public class PrestamoDbDao implements PrestamoDao {
     public Prestamo getById(int prestamoId) throws Exception {
         //Implementacion de getById 
         Prestamo prestamo = null;
-        String sql = "SELECT * FROM prestamo_v WHERE id = ?";
+        String sql = "SELECT * FROM prestamos_v WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, prestamoId);
             try (ResultSet r = stmt.executeQuery()) {
@@ -37,8 +37,8 @@ public class PrestamoDbDao implements PrestamoDao {
     @Override
     public int insert(Prestamo i) throws Exception {
         //Implementacion de metodo insert
-        String sql = "CALL insert_alumno(?, ?, ?, ?, ?)";
-        
+        String sql = "CALL insert_prestamo(?, ?, ?, ?, ?)";
+        int id = 0;
         // Usamos el objeto CallableStatement
         try (CallableStatement stmt = connection.prepareCall(sql)) {
             
@@ -47,30 +47,20 @@ public class PrestamoDbDao implements PrestamoDao {
             stmt.setInt(2, i.getAlumnoId());
             stmt.setObject(3, i.getFechaPrestamo());
             stmt.setObject(4, i.getFechaDebeDevolver());
-            stmt.setObject(5, i.getFechaDevuelto());
+            stmt.setInt(5, id);
        
-            // El stored procedure regresa una consulta (instrucción SELECT),
-            // por lo que obtenemos el resultset para obtener le resultado,
-            // para este caso es el id del registro insertado.
-            try (ResultSet r = stmt.executeQuery()) {
-                r.next();  // nos movemos a la primera fila de la consulta
-                i.setId(r.getInt("id"));  // obtenemos el resultado, el id...
-            }
+            stmt.execute();
+            return stmt.getInt(5);
         }
-        return i.getId();
     }
 
     @Override
     public void update(Prestamo i) throws Exception {
         //Implementacion de metodo update
-        String sql = "CALL update_alumno(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "CALL update_prestamo(?, ?)";
         try (CallableStatement stmt = connection.prepareCall(sql)) {
             stmt.setInt(1, i.getId());
-            stmt.setInt(2, i.getLibroInventarioId());
-            stmt.setInt(3, i.getAlumnoId());
-            stmt.setObject(4, i.getFechaPrestamo());
-            stmt.setObject(5, i.getFechaDebeDevolver());
-            stmt.setObject(6, i.getFechaDevuelto());
+            stmt.setObject(2, i.getFechaDevuelto());
             stmt.execute();  // este stored procedure no regresa resultado, por lo que uasmos execute().
         }
     }
@@ -80,7 +70,7 @@ public class PrestamoDbDao implements PrestamoDao {
         Prestamo i = new Prestamo();
         i.setId(r.getInt("id"));
         i.setLibroInventarioId(r.getInt("libro_inventario_id"));
-        i.setAlumnoId(r.getInt("alumno_id"));
+        i.setAlumnoId(r.getInt("alumno_matricula"));
         i.setFechaPrestamo(r.getObject("fecha_prestamo", LocalDateTime.class));
         i.setFechaDebeDevolver(r.getObject("fecha_debe_devolver", LocalDateTime.class));
         i.setFechaDevuelto(r.getObject("fecha_devuelto", LocalDateTime.class));

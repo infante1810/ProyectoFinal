@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package dataaccess;
 
 import com.mysql.jdbc.Connection;
@@ -35,3 +36,25 @@ class Connection {
     }
     
 }
+=======
+package dataaccess;
+
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+
+/**
+ *
+ * @author maria
+ */
+class connection {
+
+    static PreparedStatement prepareStatement(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    static CallableStatement prepareCall(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}
+>>>>>>> 7755f904b36f5a91d2f5af0eeb9cc79d0651f40e

@@ -18,7 +18,7 @@ public class LibroInventarioExistenciaVDbDao
         //Implemente el getById antes visto
        LibroInventarioExistenciaV libroinventarioexistenciav = null;
         String sql = "SELECT * FROM libro_inventario_existencia_v WHERE id = ?";
-        try (PreparedStatement stmt = Connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, libroId);
             try (ResultSet r = stmt.executeQuery()) {
                 libroinventarioexistenciav = r.next() ? toObj(r) : null;
@@ -32,7 +32,7 @@ public class LibroInventarioExistenciaVDbDao
       //solo me falta esto :(
       ArrayList<LibroInventarioExistenciaV> libroInventarioExistenciaV = null;
         String sql = "SELECT * FROM libro_inventario_existencia_v WHERE titulo LIKE ?";
-        try (PreparedStatement stmt = Connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1,"'%"+titulo+"%'");
             try (ResultSet r = stmt.executeQuery()) {
                 libroInventarioExistenciaV.add(r.next() ? toObj(r) : null);

@@ -4,14 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/App.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/DateUtils.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/dataaccess/PrestamoV.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/dataaccess/Prestamo.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/dataaccess/PrestamoVDbDao.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/dataaccess/PrestamoDao.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/UI/Returns.java</file>
             <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/UI/Dashboard.java</file>
-        </group>
-        <group name="ProyectoFinal">
-            <file>file:/C:/Users/infan/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/Books.java</file>
-            <file>file:/C:/Users/infan/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/App.java</file>
-            <file>file:/C:/Users/infan/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/connection.java</file>
-            <file>file:/C:/Users/infan/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/UpBooks.java</file>
-            <file>file:/C:/Users/infan/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/DateUtils.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/dataaccess/PrestamoVDao.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/dataaccess/PrestamoDbDao.java</file>
+            <file>file:/D:/Archivos%20de%20Programa/Google/Drive/Classroom/Programación%20Orientada%20a%20Objetos%20(ITI-27718)/Java/ProyectoFinal/src/UI/Lendings.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,18 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI;
 
 import java.awt.Color;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import dataaccess.*;
 
 /**
  *
  * @author a
  */
 public class Returns extends javax.swing.JPanel {
+    
+    private static final String DB_URL = 
+        "jdbc:mysql://localhost:3306/biblioteca";
+    
+    private static final String DB_USERNAME = "root";
+    
+    private static final String DB_PASSWORD = "root";
     Lendings Inter;
     /**
      * Creates new form Principal
@@ -162,7 +169,75 @@ public class Returns extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonMouseExited
 
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
-    
+        
+        try (Connection connection = getConnection()) {
+            
+            String book = book_id.getText();
+            int matricula = 0;
+            
+            try {
+                matricula = Integer.parseInt(folio.getText());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Matricula Invalida");
+                return;
+            }
+            
+
+            
+            String sqlLibroId = 
+                    "SELECT id FROM libros_v WHERE isbn = ?";
+            PreparedStatement stmtLibroId = connection.prepareStatement(sqlLibroId);
+            stmtLibroId.setString(1, book);
+            ResultSet rLibroId = stmtLibroId.executeQuery();
+            rLibroId.next();
+            
+            String sqlPrestamo =
+                    "SELECT * FROM prestamos_v WHERE libro_isbn = ? AND alumno_matricula = ? AND fecha_devuelto IS NULL";
+            PreparedStatement stmtPrestamo = connection.prepareStatement(sqlPrestamo);
+            stmtPrestamo.setString(1, book);
+            stmtPrestamo.setInt(2, matricula);
+            ResultSet rPrestamo = stmtPrestamo.executeQuery();
+            if(!rPrestamo.next()) {
+                JOptionPane.showMessageDialog(this, "No se encontro ningun registro, introduzca datos validos");
+                return;
+            }
+            
+            System.out.println(rPrestamo.getInt("id"));
+            
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String fechaStr = formatoFecha.format(LocalDateTime.now());
+            LocalDateTime fechaHoy = LocalDateTime.parse(fechaStr, formatoFecha);
+
+            PrestamoDao prestamoDao = new PrestamoDbDao(connection);
+            
+            Prestamo prestamo = new Prestamo();
+            prestamo = prestamoDao.getById(rPrestamo.getInt("id"));
+            prestamo.setFechaDevuelto(fechaHoy);
+            prestamoDao.update(prestamo);
+            
+            String sqlIdInv =
+                    "SELECT id FROM libros_inventario WHERE (libro_id = ?) AND (disponible = 0) "
+                    + "ORDER BY libro_id LIMIT 1";
+            PreparedStatement stmtIdLibro = connection.prepareStatement(sqlIdInv);
+            stmtIdLibro.setInt(1, rPrestamo.getInt("libro_inventario_id"));
+            ResultSet rIdLibro = stmtIdLibro.executeQuery();
+            rIdLibro.next();
+            
+            String sqlLibroPrestado =
+                    "UPDATE libros_inventario SET disponible = 1 WHERE id = ?";
+            PreparedStatement stmtLibroPrestado = connection.prepareStatement(sqlLibroPrestado);
+            stmtLibroPrestado.setInt(1, rIdLibro.getInt("id"));
+            stmtLibroPrestado.execute();            
+            
+            
+        }
+        catch (SQLException ex) {
+            System.out.println("Error SQL: " + ex.getMessage());
+        }
+        catch (Exception ex) {
+            System.out.println("ERROR " + ex.getMessage());
+        }
+        
     }//GEN-LAST:event_buttonMousePressed
 
     void setColor(JPanel panel){
@@ -172,6 +247,11 @@ public class Returns extends javax.swing.JPanel {
         panel.setBackground(new Color(16,152,173));
     }
 
+    private static Connection getConnection() throws SQLException {
+        //DriverManager.registerDriver(new OracleDriver());
+        return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
     private javax.swing.JLabel Text1;

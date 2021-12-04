@@ -9,7 +9,7 @@ import UI.Dashboard;
 public class App {
 
     private static final String DB_URL = 
-            "jdbc:mysql:aws://localhost:3306/biblioteca";
+            "jdbc:mysql://localhost:3306/biblioteca";
     
     private static final String DB_USERNAME = "root";
     
@@ -41,7 +41,7 @@ public class App {
         try (Connection connection = getConnection()) {
            
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, "M");
+            stmt.setString(1, "masc");
             ResultSet r = stmt.executeQuery();
             
             while (r.next()) {

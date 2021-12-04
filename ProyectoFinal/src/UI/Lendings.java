@@ -1,7 +1,12 @@
 package UI;
 
+import java.sql.*;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import dataaccess.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -9,6 +14,13 @@ import javax.swing.JPanel;
  */
 public class Lendings extends javax.swing.JPanel {
 
+    private static final String DB_URL = 
+        "jdbc:mysql://localhost:3306/biblioteca";
+    
+    private static final String DB_USERNAME = "root";
+    
+    private static final String DB_PASSWORD = "root";
+    
     
     /**
      * Creates new form Principal
@@ -164,6 +176,102 @@ public class Lendings extends javax.swing.JPanel {
     // PRESTAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
        
+        try (Connection connection = getConnection()) {
+            
+            String book = book_id.getText();
+            int matricula = 0;
+            
+            try {
+                matricula = Integer.parseInt(folio.getText());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Matricula Invalida");
+                return;
+            }
+            
+            String sqlVerificarPrestamoExistente =
+                    "SELECT * FROM prestamos_v WHERE (alumno_matricula = ?) AND (libro_isbn = ?) AND (fecha_devuelto IS NULL)";
+            PreparedStatement stmtVerificarPrestamoExistente = connection.prepareStatement(sqlVerificarPrestamoExistente);
+            stmtVerificarPrestamoExistente.setInt(1, matricula);
+            stmtVerificarPrestamoExistente.setString(2, book);
+            ResultSet rVerificarPrestamoExistente = stmtVerificarPrestamoExistente.executeQuery();
+            if (rVerificarPrestamoExistente.next()) {
+                JOptionPane.showMessageDialog(this, "Un mismo alumno no puede pedir dos libros iguales");
+                return;
+            }
+            
+            String sqlLibro = 
+                    "SELECT * FROM biblioteca.libros_inventario_existencia_v WHERE (isbn = ?)";
+            PreparedStatement stmtLibro = connection.prepareStatement(sqlLibro);
+            stmtLibro.setString(1, book);
+            ResultSet rLibro = stmtLibro.executeQuery();
+            if (!rLibro.next()) {
+                JOptionPane.showMessageDialog(this, "No se encontro el libro introducido");
+                return;
+            }
+            if (rLibro.getInt("cantidad_en_inventario") == 0) {
+                JOptionPane.showMessageDialog(
+                        this, "El libro " + rLibro.getString("titulo") + " no esta disponible de momento");
+                return;
+            }
+            
+            String sqlAlumno = 
+                    "SELECT * FROM biblioteca.alumnos_v WHERE matricula = ?";
+            PreparedStatement stmtAlumno = connection.prepareStatement(sqlAlumno);
+            stmtAlumno.setInt(1, matricula);
+            ResultSet rAlumno = stmtAlumno.executeQuery();
+
+            if (!rAlumno.next()) {
+                JOptionPane.showMessageDialog(this, "No se encontro la matricula introducida");
+                return;
+            }
+            
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String fechaStr = formatoFecha.format(LocalDateTime.now());
+            LocalDateTime fechaHoy = LocalDateTime.parse(fechaStr, formatoFecha);
+            
+            PrestamoDao prestamoDao = new PrestamoDbDao(connection);
+            
+            Prestamo prestamo = new Prestamo();
+            prestamo.setLibroInventarioId(rLibro.getInt("id"));
+            prestamo.setAlumnoId(rAlumno.getInt("matricula"));
+            prestamo.setFechaPrestamo(fechaHoy);
+            prestamo.setFechaDebeDevolver(getFechaAEntregar(fechaHoy));
+            prestamo.setFechaDevuelto(null);
+            int id = prestamoDao.insert(prestamo);
+            JOptionPane.showMessageDialog(
+                    this, "Prestamo del libro " + rLibro.getString("titulo") + "realizado con exito. Se tiene que devolver a dia " + getFechaAEntregar(fechaHoy));
+            
+            String sqlLibroInv = 
+                    "SELECT libro_inventario_id FROM prestamos WHERE id = ?";
+            PreparedStatement stmtLibroInv = connection.prepareStatement(sqlLibroInv);
+            stmtLibroInv.setInt(1, id);
+            ResultSet rLibroInv = stmtLibroInv.executeQuery();
+            rLibroInv.next();
+            
+            String sqlIdInv =
+                    "SELECT id FROM libros_inventario WHERE (libro_id = ?) AND (disponible = 1) "
+                    + "ORDER BY libro_id LIMIT 1";
+            PreparedStatement stmtIdLibro = connection.prepareStatement(sqlIdInv);
+            stmtIdLibro.setInt(1, rLibroInv.getInt("libro_inventario_id"));
+            ResultSet rIdLibro = stmtIdLibro.executeQuery();
+            rIdLibro.next();
+            
+            String sqlLibroPrestado =
+                    "UPDATE libros_inventario SET disponible = 0 WHERE id = ?";
+            PreparedStatement stmtLibroPrestado = connection.prepareStatement(sqlLibroPrestado);
+            stmtLibroPrestado.setInt(1, rIdLibro.getInt("id"));
+            stmtLibroPrestado.execute();
+            
+            
+
+        }
+        catch (SQLException ex) {
+            System.out.println("Error SQL: " + ex.getMessage());
+        }
+        catch (Exception ex) {
+            System.out.println("ERROR " + ex.getMessage());
+        }
+        
     }//GEN-LAST:event_buttonMousePressed
 
     private void folioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folioActionPerformed
@@ -176,6 +284,19 @@ public class Lendings extends javax.swing.JPanel {
     void resetColor(JPanel panel){
         panel.setBackground(new Color(16,152,173));
     }
+    
+    private static Connection getConnection() throws SQLException {
+        //DriverManager.registerDriver(new OracleDriver());
+        return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+    }
+    
+    private LocalDateTime getFechaAEntregar(LocalDateTime fecha) {
+        
+        return fecha.plusDays(7);
+        
+    }
+    
+    
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;

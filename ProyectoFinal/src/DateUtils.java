@@ -1,5 +1,3 @@
-package edu.upv.poo;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

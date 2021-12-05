@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import dataaccess.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -190,7 +191,7 @@ public class Returns extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -268,8 +269,6 @@ public class Returns extends javax.swing.JPanel {
                 return;
             }
             
-            System.out.println(rPrestamo.getInt("id"));
-            
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String fechaStr = formatoFecha.format(LocalDateTime.now());
             LocalDateTime fechaHoy = LocalDateTime.parse(fechaStr, formatoFecha);
@@ -295,6 +294,7 @@ public class Returns extends javax.swing.JPanel {
             stmtLibroPrestado.setInt(1, rIdLibro.getInt("id"));
             stmtLibroPrestado.execute();            
             
+            JOptionPane.showMessageDialog(this, "Libro devuelto exitosamente a dia " + fechaHoy);
             
         }
         catch (SQLException ex) {
@@ -320,6 +320,53 @@ public class Returns extends javax.swing.JPanel {
 
     private void button1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MousePressed
 
+        try (Connection connection = getConnection()) {
+            
+            int matricula = 0;
+        
+            try {
+                matricula = Integer.parseInt(folio.getText());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Matricula Invalida");
+                return;
+            }
+        
+            String sqlBuscarPorMatricula = 
+                "SELECT libro_titulo, fecha_debe_devolver, libro_isbn FROM prestamos_v "
+                + "WHERE (alumno_matricula = ?) AND (fecha_devuelto IS NULL)";
+            PreparedStatement stmtBuscarPorMatricula = connection.prepareStatement(sqlBuscarPorMatricula);     
+            stmtBuscarPorMatricula.setInt(1, matricula);
+            ResultSet rBuscarPorMatricula = stmtBuscarPorMatricula.executeQuery();
+            if(!rBuscarPorMatricula.next()) {
+                JOptionPane.showMessageDialog(this, "No se encontro ningun prestamo pendiente con la matricula introducida.");
+                return;
+            }
+            
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            while(model.getRowCount() > 0) {
+                model.removeRow(0);
+            }
+            String titulo = rBuscarPorMatricula.getString("libro_titulo");
+            String fechaDebeDevolver = rBuscarPorMatricula.getString("fecha_debe_devolver");
+            String isbn = rBuscarPorMatricula.getString("libro_isbn");
+            model.addRow(new Object[] {titulo, fechaDebeDevolver, isbn});
+            while (rBuscarPorMatricula.next()) {
+            
+                titulo = rBuscarPorMatricula.getString("libro_titulo");
+                fechaDebeDevolver = rBuscarPorMatricula.getString("fecha_debe_devolver");
+                isbn = rBuscarPorMatricula.getString("libro_isbn");
+                model.addRow(new Object[] {titulo, fechaDebeDevolver, isbn});
+
+            }
+
+            
+        } catch (SQLException ex) {
+            System.out.println("Error SQL: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("ERROR " + ex.getMessage());
+        }
+        
+        
     }//GEN-LAST:event_button1MousePressed
 
     private void folioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folioActionPerformed

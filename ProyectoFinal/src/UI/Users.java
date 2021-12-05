@@ -5,12 +5,22 @@ import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author a
  */
 public class Users extends javax.swing.JPanel {
+    
+    private static final String DB_URL = 
+        "jdbc:mysql://localhost:3306/biblioteca";
+    
+    private static final String DB_USERNAME = "root";
+    
+    private static final String DB_PASSWORD = "root";
 
     /**
      * Creates new form Principal
@@ -59,7 +69,7 @@ public class Users extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
 
         dateSearchtxt.setForeground(new java.awt.Color(102, 102, 102));
-        dateSearchtxt.setText("Ingrese la fecha a buscar(dd/mm/yyyy)");
+        dateSearchtxt.setText("Ingrese la fecha a buscar (yyyy-MM-dd)");
         dateSearchtxt.setBorder(null);
         dateSearchtxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -255,6 +265,8 @@ public class Users extends javax.swing.JPanel {
     // BORRAR
     private void deleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMousePressed
        
+        
+        
     }//GEN-LAST:event_deleteMousePressed
     // EDITAR
     private void editMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMousePressed
@@ -263,6 +275,69 @@ public class Users extends javax.swing.JPanel {
     // BUSCAR
     private void searchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMousePressed
         
+        try (Connection connection = getConnection()) {
+            
+            String fecha = dateSearchtxt.getText() + "%";
+            
+            String sqlBuscarPrestamos = "SELECT "
+                    + "lv.titulo, lv.isbn, p.alumno_matricula, p.fecha_prestamo, "
+                    + "p.fecha_devuelto, p.fecha_debe_devolver "
+                    + "FROM prestamos p JOIN libros_v lv "
+                    + "ON p.libro_inventario_id = lv.id "
+                    + "WHERE p.fecha_prestamo LIKE ?";
+            PreparedStatement stmtBuscarPrestamos = 
+                    connection.prepareStatement(sqlBuscarPrestamos);
+            stmtBuscarPrestamos.setString(1, fecha);
+            ResultSet rBuscarPrestamos = stmtBuscarPrestamos.executeQuery();
+            if (!rBuscarPrestamos.next()) {
+                JOptionPane.showMessageDialog(this, "No se encontro ningun prestamo con la fecha introducida");
+                return;
+            }
+            
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            while(model.getRowCount() > 0) {
+                model.removeRow(0);
+            }
+            String titulo = rBuscarPrestamos.getString("titulo");
+            String isbn = rBuscarPrestamos.getString("isbn");
+            String matricula = rBuscarPrestamos.getString("alumno_matricula");
+            String fechaPrestamo = rBuscarPrestamos.getString("fecha_prestamo");
+            String fechaDevuelto = "";
+            if(rBuscarPrestamos.getString("fecha_devuelto").isEmpty()) {
+                fechaDevuelto = "SIN DEVOLVER";
+            } else {
+                fechaDevuelto = rBuscarPrestamos.getString("fecha_devuelto");
+            }
+            String fechaDebeDevolver = rBuscarPrestamos.getString("fecha_debe_devolver");
+            model.addRow(new Object[] {
+                titulo, isbn, matricula, fechaPrestamo, fechaDevuelto, fechaDebeDevolver
+            });
+            while(rBuscarPrestamos.next()) {
+                
+                titulo = rBuscarPrestamos.getString("titulo");
+                isbn = rBuscarPrestamos.getString("isbn");
+                matricula = rBuscarPrestamos.getString("alumno_matricula");
+                fechaPrestamo = rBuscarPrestamos.getString("fecha_prestamo");
+                fechaDevuelto = "no pasa por el if";
+                if(rBuscarPrestamos.getString("fecha_devuelto") == null) {
+                    fechaDevuelto = "SIN DEVOLVER";
+                } else {
+                    fechaDevuelto = rBuscarPrestamos.getString("fecha_devuelto");
+                }
+                fechaDebeDevolver = rBuscarPrestamos.getString("fecha_debe_devolver");
+                model.addRow(new Object[] {
+                    titulo, isbn, matricula, fechaPrestamo, fechaDevuelto, fechaDebeDevolver
+                });            
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("Error SQL: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("ERROR " + ex.getMessage());
+        }
+        
     }//GEN-LAST:event_searchMousePressed
 
     private void dateSearchtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateSearchtxtActionPerformed
@@ -270,7 +345,7 @@ public class Users extends javax.swing.JPanel {
     }//GEN-LAST:event_dateSearchtxtActionPerformed
 
     private void dateSearchtxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateSearchtxtMouseClicked
-        if(dateSearchtxt.getText().equals("Ingrese la fecha a buscar(dd/mm/yyyy)"))
+        if(dateSearchtxt.getText().equals("Ingrese la fecha a buscar (yyyy-MM-dd)"))
             dateSearchtxt.setText("");
     }//GEN-LAST:event_dateSearchtxtMouseClicked
 
@@ -279,6 +354,11 @@ public class Users extends javax.swing.JPanel {
     }
     void resetColor(JPanel panel){
         panel.setBackground(new Color(16,152,173));
+    }
+    
+    private static Connection getConnection() throws SQLException {
+        //DriverManager.registerDriver(new OracleDriver());
+        return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
     }
     
     

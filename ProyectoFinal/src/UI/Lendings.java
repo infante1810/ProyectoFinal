@@ -113,7 +113,7 @@ public class Lendings extends javax.swing.JPanel {
         add(book_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 260, 30));
 
         book_return.setForeground(new java.awt.Color(102, 102, 102));
-        book_return.setText("dd/mm/yyyy");
+        book_return.setText("yyyy-MM-dd HH:mm");
         book_return.setBorder(null);
         book_return.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -182,7 +182,7 @@ public class Lendings extends javax.swing.JPanel {
        if(book_id.getText().equals("") || book_id.getText() == null || book_id.getText().equals(" "))
         book_id.setText("Ingrese el ISBN del Libro a prestar");
        if(book_return.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
-            book_return.setText("dd/mm/yyyy");
+            book_return.setText("(\"yyyy-MM-dd HH:mm");
     }//GEN-LAST:event_folioMousePressed
 
     private void book_idMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_book_idMousePressed
@@ -191,7 +191,7 @@ public class Lendings extends javax.swing.JPanel {
         if(folio.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
             folio.setText("Ingrese la matricula del estudiante");
         if(book_return.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
-            book_return.setText("dd/mm/yyyy");
+            book_return.setText("(\"yyyy-MM-dd HH:mm");
     }//GEN-LAST:event_book_idMousePressed
 
     private void buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseEntered
@@ -206,13 +206,17 @@ public class Lendings extends javax.swing.JPanel {
        
         try (Connection connection = getConnection()) {
             
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String book = book_id.getText();
             int matricula = 0;
+            String fechaEntregaStr = book_return.getText();
+            LocalDateTime fechaEntrega = null;
             
             try {
+                fechaEntrega = LocalDateTime.parse(fechaEntregaStr, formatoFecha);
                 matricula = Integer.parseInt(folio.getText());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Matricula Invalida");
+                JOptionPane.showMessageDialog(this, "Datos introducidos invalidos, verifique la matricula o la fecha");
                 return;
             }
             
@@ -253,7 +257,6 @@ public class Lendings extends javax.swing.JPanel {
                 return;
             }
             
-            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String fechaStr = formatoFecha.format(LocalDateTime.now());
             LocalDateTime fechaHoy = LocalDateTime.parse(fechaStr, formatoFecha);
             
@@ -263,11 +266,11 @@ public class Lendings extends javax.swing.JPanel {
             prestamo.setLibroInventarioId(rLibro.getInt("id"));
             prestamo.setAlumnoId(rAlumno.getInt("matricula"));
             prestamo.setFechaPrestamo(fechaHoy);
-            prestamo.setFechaDebeDevolver(getFechaAEntregar(fechaHoy));
+            prestamo.setFechaDebeDevolver(fechaEntrega);
             prestamo.setFechaDevuelto(null);
             int id = prestamoDao.insert(prestamo);
             JOptionPane.showMessageDialog(
-                    this, "Prestamo del libro " + rLibro.getString("titulo") + "realizado con exito. Se tiene que devolver a dia " + getFechaAEntregar(fechaHoy));
+                    this, "Prestamo del libro " + rLibro.getString("titulo") + " realizado con exito. Se tiene que devolver a dia " + fechaEntrega);
             
             String sqlLibroInv = 
                     "SELECT libro_inventario_id FROM prestamos WHERE id = ?";
@@ -307,7 +310,7 @@ public class Lendings extends javax.swing.JPanel {
     }//GEN-LAST:event_folioActionPerformed
 
     private void book_returnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_book_returnMousePressed
-         if(book_return.getText().equals("dd/mm/yyyy"))
+         if(book_return.getText().equals("yyyy-MM-dd HH:mm"))
             book_return.setText("");
         if(folio.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
             folio.setText("Ingrese la matricula del estudiante");
@@ -329,12 +332,6 @@ public class Lendings extends javax.swing.JPanel {
     private static Connection getConnection() throws SQLException {
         //DriverManager.registerDriver(new OracleDriver());
         return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-    }
-    
-    private LocalDateTime getFechaAEntregar(LocalDateTime fecha) {
-        
-        return fecha.plusDays(7);
-        
     }
     
     

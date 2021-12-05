@@ -1,9 +1,14 @@
 package UI;
 
+
 import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
 import java.awt.BorderLayout;
+import dataaccess.*;
+import java.sql.Connection;
+import javax.swing.table.DefaultTableModel;
+import defaultPackage.*;
 
 /**
  *
@@ -11,13 +16,13 @@ import java.awt.BorderLayout;
  */
 public class BooksFrame extends javax.swing.JPanel {
 
-    
+    private Libro[] libros;
     /**
      * Creates new form Principal
      */
     public BooksFrame() {
         initComponents();
-       
+       consultarLibros();
     }
 
     /**
@@ -298,7 +303,43 @@ public class BooksFrame extends javax.swing.JPanel {
         if(bid.getText().equals("Ingrese el nombre de editorial"))
         bid.setText("");
     }//GEN-LAST:event_bidMouseClicked
-
+    
+    private void consultarLibros() {
+        libros = null;
+        try (Connection connection = App.getConnection()) {
+            LibroDao libroDao = App.getLibroDao(connection);
+            libros = libroDao.getAll();
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Libro");
+        }
+        try{
+            cargarTblLibros();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLibros");
+        }
+    }
+    private void cargarTblLibros() {
+        
+        DefaultTableModel tblModel = (
+                DefaultTableModel)jTable1.getModel();
+        
+        while (tblModel.getRowCount() != 0) tblModel.removeRow(0);
+        
+        if (libros == null) return;
+        
+        for (int i = 0; i < libros.length; i++) {
+            tblModel.insertRow(i, toRow(libros[i]));
+        }
+        
+    }
+    
+    private Object[] toRow(Libro i) {
+        return new Object[] {
+            i.getTitulo(),i.getEdicion(),i.getTipoRecursoId(),i.getEdicion(),i.getEditorialId(),i.getAutores(),i.getIsbn(),i.isActivo()
+        };
+    }
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }

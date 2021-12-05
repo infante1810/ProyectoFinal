@@ -1,22 +1,28 @@
 package UI;
 
+
 import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
 import java.awt.BorderLayout;
+import dataaccess.*;
+import java.sql.Connection;
+import javax.swing.table.DefaultTableModel;
+import defaultPackage.*;
 
 /**
  *
  * @author a
  */
 public class EditorialFrame extends javax.swing.JPanel {
-
+    private Editorial[] editoriales;
     
     /**
      * Creates new form Principal
      */
     public EditorialFrame() {
         initComponents();
+        consultarEditoriales();
        
     }
 
@@ -297,6 +303,47 @@ public class EditorialFrame extends javax.swing.JPanel {
     void resetColor(JPanel panel){
         panel.setBackground(new Color(16,152,173));
     }
+    private void consultarEditoriales() {
+        editoriales = null;
+        try (Connection connection = App.getConnection()) {
+            EditorialDao editorialDao = App.getEditoriaDao(connection);
+//We get a connection stable here
+            editoriales = editorialDao.getAll();
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial");
+        }
+        try{
+            cargarTblEditoriales();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLEditoriales");
+        }
+        
+    }
+    private void cargarTblEditoriales() {
+        
+        DefaultTableModel tblModel = (
+                DefaultTableModel)jTable1.getModel();
+        
+        while (tblModel.getRowCount() != 0) tblModel.removeRow(0);
+        
+        if (editoriales == null) return;
+        
+        for (int i = 0; i < editoriales.length; i++) {
+            tblModel.insertRow(i, toRow(editoriales[i]));
+        }
+        
+    }
+    
+    private Object[] toRow(Editorial i) {
+        return new Object[] {
+            i.getNombre(), i.getPais(), i.getEmail()
+        };
+    }
+    
+    
+    
     
     
 

@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package UI;
+import static UI.Dashboard.content;
+import dataaccess.*;
+import defaultPackage.App;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.Connection;
+import java.time.LocalDate;
 import javax.swing.JPanel;
 
 /**
@@ -561,7 +567,28 @@ public class UpBooks extends javax.swing.JPanel {
 
     // SUBIR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
+        Users p1 = new Users();
+    //TOFIX Con el merge agregar campos faltantes    
+    //de aqui
+        Libro a = new Libro();
+        a.setTitulo(title.getText());
+        a.setTipoRecursoId(Integer.parseInt(source.getText()));
+        a.setAutores(authors.getText());
+        a.setEdicion(editionb.getText());
+        a.setEditorialId(Integer.parseInt(idEditorial.getText()));
+        a.setIsbn(isbn.getText());
+        a.setActivo(true);
         
+        addBooks(a);
+        //a aqui fue creado para tratar de añadir books
+        
+        p1.setSize(750, 430);
+        p1.setLocation(0, 0);
+
+        content.removeAll();
+        content.add(p1, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
     }//GEN-LAST:event_buttonMousePressed
 
     private void stateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stateMousePressed
@@ -637,4 +664,14 @@ public class UpBooks extends javax.swing.JPanel {
     private javax.swing.JTextField stock;
     private javax.swing.JTextField title;
     // End of variables declaration//GEN-END:variables
+
+    private void addBooks(Libro a) {
+        try (Connection connection = App.getConnection()) {
+            LibroDao libroDao = App.getLibroDao(connection);
+            libroDao.insert(a);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema subir Libro");
+        }
+    }
 }

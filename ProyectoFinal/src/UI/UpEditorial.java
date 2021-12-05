@@ -9,6 +9,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
+import dataaccess.*;
+import defaultPackage.App;
+import java.sql.Connection;
+import java.time.LocalDate;
 /**
  *
  * @author a
@@ -94,7 +98,6 @@ public class UpEditorial extends javax.swing.JPanel {
         jSeparator3.setPreferredSize(new java.awt.Dimension(200, 10));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 10, 350));
 
-        state.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         state.setForeground(new java.awt.Color(102, 102, 102));
         state.setText("Ingrese estado de editorial");
         state.setBorder(null);
@@ -137,7 +140,6 @@ public class UpEditorial extends javax.swing.JPanel {
         Text3.setText("Editorial ID");
         add(Text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        name.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         name.setForeground(new java.awt.Color(102, 102, 102));
         name.setText("Ingrese el nombre");
         name.setBorder(null);
@@ -161,7 +163,6 @@ public class UpEditorial extends javax.swing.JPanel {
         Text4.setText("Pais");
         add(Text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
-        country.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         country.setForeground(new java.awt.Color(102, 102, 102));
         country.setText("Ingrese Pais");
         country.setBorder(null);
@@ -185,7 +186,6 @@ public class UpEditorial extends javax.swing.JPanel {
         Text5.setText("Email");
         add(Text5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
-        email.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         email.setForeground(new java.awt.Color(102, 102, 102));
         email.setText("Ingrese email");
         email.setBorder(null);
@@ -209,7 +209,6 @@ public class UpEditorial extends javax.swing.JPanel {
         Text6.setText("Nombre");
         add(Text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
-        Id.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         Id.setForeground(new java.awt.Color(102, 102, 102));
         Id.setText("Ingrese ID");
         Id.setBorder(null);
@@ -314,6 +313,14 @@ public class UpEditorial extends javax.swing.JPanel {
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
         
         Users p1 = new Users();
+        Editorial a = new Editorial();
+        a.setNombre(name.getText());
+        a.setPais(country.getText());
+        a.setEmail(email.getText());
+        a.setActivo(true);
+        
+        addEditorial(a);
+        
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
 
@@ -374,4 +381,14 @@ public class UpEditorial extends javax.swing.JPanel {
     private javax.swing.JTextField name;
     private javax.swing.JTextField state;
     // End of variables declaration//GEN-END:variables
+
+    private void addEditorial(Editorial a) {
+        try (Connection connection = App.getConnection()) {
+            EditorialDao editorialDao = App.getEditoriaDao(connection);
+            editorialDao.insert(a);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Libro");
+        }
+    }
 }

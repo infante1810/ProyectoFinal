@@ -9,6 +9,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
+import dataaccess.*;
+import defaultPackage.*;
+import java.sql.Connection;
+import java.time.LocalDate;
 /**
  *
  * @author a
@@ -408,6 +412,20 @@ public class UpUsers extends javax.swing.JPanel {
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
         
         Users p1 = new Users();
+    //TOFIX this things xdxd    
+    //de aqui
+        Alumno a = new Alumno();
+        a.setNombre(name.getText());
+        a.setApellidos(ap.getText());
+        a.setGenero(gender.getText());
+        a.setCarreraId(Integer.parseInt(idCarrera.getText()));
+        Carrera c= new Carrera();
+        c.setNombre(nameCarrera.getText());
+        a.setCarrera(c);
+        a.setFechaNacimiento(LocalDate.parse(date.getText()));
+        addStudents(a);
+        //a aqui fue creado para tratar de añadir student
+        
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
 
@@ -468,7 +486,16 @@ public class UpUsers extends javax.swing.JPanel {
        if(nameCarrera.getText().equals("") || nameCarrera.getText() == null || nameCarrera.getText().equals(" "))
         nameCarrera.setText("Ingrese nombre de carrera");
     }//GEN-LAST:event_IdMouseClicked
-
+//Este fue creado para tratar de añadir students
+    private void addStudents(Alumno a){
+        try (Connection connection = App.getConnection()) {
+            AlumnoDao alumnoDao = App.getAlumnoDao(connection);
+            alumnoDao.insert(a);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Libro");
+        }
+    }
    void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }

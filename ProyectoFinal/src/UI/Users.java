@@ -1,22 +1,27 @@
 package UI;
-
+import defaultPackage.*;
+import dataaccess.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
+import java.sql.Connection;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author a
  */
 public class Users extends javax.swing.JPanel {
-
+//TOFIX TODO TRY TO WORK PROPERLY 
+    private Alumno[] alumnos;
     /**
      * Creates new form Principal
      */
     public Users() {
         initComponents();
+        consultarUsers();
         
     }
 
@@ -61,7 +66,6 @@ public class Users extends javax.swing.JPanel {
         jSeparator2.setPreferredSize(new java.awt.Dimension(250, 10));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
 
-        usrnm.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         usrnm.setForeground(new java.awt.Color(102, 102, 102));
         usrnm.setText("Ingrese la matricula del estudiante a buscar");
         usrnm.setBorder(null);
@@ -180,33 +184,33 @@ public class Users extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nombres", "Apellidos", "Genero", "CarreraId", "Carrera", "Fecha de nacimiento"
+                "Libro", "ISBN", "Prestado a", "Fecha de Prestamo", "Fecha de devolucion", "Fecha de Entrega"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true
+                false, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -341,4 +345,45 @@ public class Users extends javax.swing.JPanel {
     private javax.swing.JPanel search;
     private javax.swing.JTextField usrnm;
     // End of variables declaration//GEN-END:variables
+
+    private void consultarUsers() {
+        alumnos = null;
+        try (Connection connection = App.getConnection()) {
+            AlumnoDao alumnoDao = App.getAlumnoDao(connection);
+            alumnos = alumnoDao.getAll();
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Alumno");
+        }
+        try{
+            cargarTblUsers();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLUsers");
+        }
+        
+    }
+    
+    private void cargarTblUsers() {
+        
+        DefaultTableModel tblModel = (
+                DefaultTableModel)jTable1.getModel();
+        
+        while (tblModel.getRowCount() != 0) tblModel.removeRow(0);
+        
+        if (alumnos == null) return;
+        
+        for (int i = 0; i < alumnos.length; i++) {
+            tblModel.insertRow(i, toRow(alumnos[i]));
+        }
+        
+    }
+    
+    private Object[] toRow(Alumno i) {
+        return new Object[] {
+            i.getNombre(), i.getApellidos(), i.getGenero(), i.getCarreraId(), i.getCarrera(), i.getFechaNacimiento()
+        };
+    }
+
+    
 }

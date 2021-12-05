@@ -83,7 +83,7 @@ CREATE TABLE `carreras` (
   `nombre` varchar(256) NOT NULL,
   `activo` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,8 +92,7 @@ CREATE TABLE `carreras` (
 
 LOCK TABLES `carreras` WRITE;
 /*!40000 ALTER TABLE `carreras` DISABLE KEYS */;
-INSERT INTO `carreras` VALUES (1,'Ingeniería en Tecnologías de Información y Comunicaciones',_binary '')
-(2,'Ingeniería en Tecnologías de Manofactura',_binary '');
+INSERT INTO `carreras` VALUES (1,'Ingeniería en Tecnologías de Información y Comunicaciones',_binary ''),(2,'Ingeniería en Tecnologías de Manofactura',_binary ''),(3,'Ingeniería en Tecnologías de Manofactura',_binary ''),(4,'Ingeniería en Tecnologías de Manofactura',_binary ''),(5,'Ingeniería en Tecnologías de Manofactura',_binary ''),(6,'Ingeniería en Tecnologías de Manofactura',_binary ''),(7,'Ingeniería en Tecnologías de Manofactura',_binary ''),(8,'Ingeniería en Tecnologías de Manofactura',_binary ''),(9,'Ingeniería en Tecnologías de Manofactura',_binary ''),(10,'Ingeniería en Tecnologías de Manofactura',_binary ''),(11,'Ingeniería en Tecnologías de Manofactura',_binary ''),(12,'Ingeniería en Tecnologías de Manofactura',_binary ''),(13,'Ingeniería en Tecnologías de Manofactura',_binary ''),(14,'Ingeniería en Tecnologías de Manofactura',_binary ''),(15,'Ingeniería en Tecnologías de Manofactura',_binary ''),(16,'Ingeniería en Tecnologías de Manofactura',_binary ''),(17,'Ingeniería en Tecnologías de Manofactura',_binary ''),(18,'Ingeniería en Tecnologías de Manofactura',_binary ''),(19,'Ingeniería en Tecnologías de Manofactura',_binary ''),(20,'Ingeniería en Tecnologías de Manofactura',_binary ''),(21,'Ingeniería en Tecnologías de Manofactura',_binary ''),(22,'Ingeniería en Tecnologías de Manofactura',_binary ''),(23,'Ingeniería en Tecnologías de Manofactura',_binary ''),(24,'Ingeniería en Tecnologías de Manofactura',_binary ''),(25,'Ingeniería en Tecnologías de Manofactura',_binary ''),(26,'Ingeniería en Tecnologías de Manofactura',_binary ''),(27,'Ingeniería en Tecnologías de Manofactura',_binary ''),(28,'Ingeniería en Tecnologías de Manofactura',_binary ''),(29,'Ingeniería en Tecnologías de Manofactura',_binary ''),(30,'Ingeniería en Tecnologías de Manofactura',_binary ''),(31,'Ingeniería en Tecnologías de Manofactura',_binary ''),(32,'Ingeniería en Tecnologías de Manofactura',_binary ''),(33,'Ingeniería en Tecnologías de Manofactura',_binary ''),(34,'Ingeniería en Tecnologías de Manofactura',_binary ''),(35,'Ingeniería en Tecnologías de Manofactura',_binary ''),(36,'Ingeniería en Tecnologías de Manofactura',_binary ''),(37,'Ingeniería en Tecnologías de Manofactura',_binary ''),(38,'Ingeniería en Tecnologías de Manofactura',_binary ''),(39,'Ingeniería en Tecnologías de Manofactura',_binary ''),(40,'Ingeniería en Tecnologías de Manofactura',_binary ''),(41,'Ingeniería en Tecnologías de Manofactura',_binary ''),(42,'Ingeniería en Tecnologías de Manofactura',_binary ''),(43,'Ingeniería en Tecnologías de Manofactura',_binary ''),(44,'Ingeniería en Tecnologías de Manofactura',_binary ''),(45,'Ingeniería en Tecnologías de Manofactura',_binary ''),(46,'Ingeniería en Tecnologías de Manofactura',_binary ''),(47,'Ingeniería en Tecnologías de Manofactura',_binary ''),(48,'Ingeniería en Tecnologías de Manofactura',_binary ''),(49,'Ingeniería en Tecnologías de Manofactura',_binary ''),(50,'Ingeniería en Tecnologías de Manofactura',_binary ''),(51,'Ingeniería en Tecnologías de Manofactura',_binary ''),(52,'Ingeniería en Tecnologías de Manofactura',_binary ''),(53,'Ingeniería en Tecnologías de Manofactura',_binary ''),(54,'Ingeniería en Tecnologías de Manofactura',_binary ''),(55,'Ingeniería en Tecnologías de Manofactura',_binary ''),(56,'Ingeniería en Tecnologías de Manofactura',_binary ''),(57,'Ingeniería en Tecnologías de Manofactura',_binary ''),(58,'Ingeniería en Tecnologías de Manofactura',_binary ''),(59,'Ingeniería en Tecnologías de Manofactura',_binary ''),(60,'Ingeniería en Tecnologías de Manofactura',_binary ''),(61,'Ingeniería en Tecnologías de Manofactura',_binary ''),(62,'Ingeniería en Tecnologías de Manofactura',_binary ''),(63,'Ingeniería en Tecnologías de Manofactura',_binary ''),(64,'Ingeniería en Tecnologías de Manofactura',_binary ''),(65,'Ingeniería en Tecnologías de Manofactura',_binary ''),(66,'Ingeniería en Tecnologías de Manofactura',_binary ''),(67,'Ingeniería en Tecnologías de Manofactura',_binary ''),(68,'Ingeniería en Tecnologías de Manofactura',_binary ''),(69,'Ingeniería en Tecnologías de Manofactura',_binary ''),(70,'Ingeniería en Tecnologías de Manofactura',_binary ''),(71,'Ingeniería en Tecnologías de Manofactura',_binary ''),(72,'Ingeniería en Tecnologías de Manofactura',_binary ''),(73,'Ingeniería en Tecnologías de Manofactura',_binary ''),(74,'Ingeniería en Tecnologías de Manofactura',_binary ''),(75,'Ingeniería en Tecnologías de Manofactura',_binary ''),(76,'Ingeniería en Tecnologías de Manofactura',_binary ''),(77,'Ingeniería en Tecnologías de Manofactura',_binary ''),(78,'Ingeniería en Tecnologías de Manofactura',_binary ''),(79,'Ingeniería en Tecnologías de Manofactura',_binary ''),(80,'Ingeniería en Tecnologías de Manofactura',_binary ''),(81,'Ingeniería en Tecnologías de Manofactura',_binary ''),(82,'Ingeniería en Tecnologías de Manofactura',_binary ''),(83,'Ingeniería en Tecnologías de Manofactura',_binary ''),(84,'Ingeniería en Tecnologías de Manofactura',_binary ''),(85,'Ingeniería en Tecnologías de Manofactura',_binary ''),(86,'Ingeniería en Tecnologías de Manofactura',_binary ''),(87,'Ingeniería en Tecnologías de Manofactura',_binary ''),(88,'Ingeniería en Tecnologías de Manofactura',_binary ''),(89,'Ingeniería en Tecnologías de Manofactura',_binary ''),(90,'Ingeniería en Tecnologías de Manofactura',_binary ''),(91,'Ingeniería en Tecnologías de Manofactura',_binary ''),(92,'Ingeniería en Tecnologías de Manofactura',_binary ''),(93,'Ingeniería en Tecnologías de Manofactura',_binary ''),(94,'Ingeniería en Tecnologías de Manofactura',_binary ''),(95,'Ingeniería en Tecnologías de Manofactura',_binary ''),(96,'Ingeniería en Tecnologías de Manofactura',_binary ''),(97,'Ingeniería en Tecnologías de Manofactura',_binary ''),(98,'Ingeniería en Tecnologías de Manofactura',_binary ''),(99,'Ingeniería en Tecnologías de Manofactura',_binary ''),(100,'Ingeniería en Tecnologías de Manofactura',_binary ''),(101,'Ingeniería en Tecnologías de Manofactura',_binary ''),(102,'Ingeniería en Tecnologías de Manofactura',_binary ''),(103,'Ingeniería en Tecnologías de Manofactura',_binary ''),(104,'Ingeniería en Tecnologías de Manofactura',_binary ''),(105,'Ingeniería en Tecnologías de Manofactura',_binary ''),(106,'Ingeniería en Tecnologías de Manofactura',_binary ''),(107,'Ingeniería en Tecnologías de Manofactura',_binary ''),(108,'Ingeniería en Tecnologías de Manofactura',_binary ''),(109,'Ingeniería en Tecnologías de Manofactura',_binary ''),(110,'Ingeniería en Tecnologías de Manofactura',_binary ''),(111,'Ingeniería en Tecnologías de Manofactura',_binary ''),(112,'Ingeniería en Tecnologías de Manofactura',_binary ''),(113,'Ingeniería en Tecnologías de Manofactura',_binary ''),(114,'Ingeniería en Tecnologías de Manofactura',_binary ''),(115,'Ingeniería en Tecnologías de Manofactura',_binary ''),(116,'Ingeniería en Tecnologías de Manofactura',_binary ''),(117,'Ingeniería en Tecnologías de Manofactura',_binary ''),(118,'Ingeniería en Tecnologías de Manofactura',_binary ''),(119,'Ingeniería en Tecnologías de Manofactura',_binary ''),(120,'Ingeniería en Tecnologías de Manofactura',_binary ''),(121,'Ingeniería en Tecnologías de Manofactura',_binary ''),(122,'Ingeniería en Tecnologías de Manofactura',_binary ''),(123,'Ingeniería en Tecnologías de Manofactura',_binary ''),(124,'Ingeniería en Tecnologías de Manofactura',_binary ''),(125,'Ingeniería en Tecnologías de Manofactura',_binary ''),(126,'Ingeniería en Tecnologías de Manofactura',_binary ''),(127,'Ingeniería en Tecnologías de Manofactura',_binary ''),(128,'Ingeniería en Tecnologías de Manofactura',_binary ''),(129,'Ingeniería en Tecnologías de Manofactura',_binary ''),(130,'Ingeniería en Tecnologías de Manofactura',_binary ''),(131,'Ingeniería en Tecnologías de Manofactura',_binary ''),(132,'Ingeniería en Tecnologías de Manofactura',_binary ''),(133,'Ingeniería en Tecnologías de Manofactura',_binary ''),(134,'Ingeniería en Tecnologías de Manofactura',_binary ''),(135,'Ingeniería en Tecnologías de Manofactura',_binary ''),(136,'Ingeniería en Tecnologías de Manofactura',_binary ''),(137,'Ingeniería en Tecnologías de Manofactura',_binary ''),(138,'Ingeniería en Tecnologías de Manofactura',_binary ''),(139,'Ingeniería en Tecnologías de Manofactura',_binary ''),(140,'Ingeniería en Tecnologías de Manofactura',_binary ''),(141,'Ingeniería en Tecnologías de Manofactura',_binary ''),(142,'Ingeniería en Tecnologías de Manofactura',_binary ''),(143,'Ingeniería en Tecnologías de Manofactura',_binary ''),(144,'Ingeniería en Tecnologías de Manofactura',_binary ''),(145,'Ingeniería en Tecnologías de Manofactura',_binary ''),(146,'Ingeniería en Tecnologías de Manofactura',_binary ''),(147,'Ingeniería en Tecnologías de Manofactura',_binary ''),(148,'Ingeniería en Tecnologías de Manofactura',_binary ''),(149,'Ingeniería en Tecnologías de Manofactura',_binary ''),(150,'Ingeniería en Tecnologías de Manofactura',_binary ''),(151,'Ingeniería en Tecnologías de Manofactura',_binary ''),(152,'Ingeniería en Tecnologías de Manofactura',_binary ''),(153,'Ingeniería en Tecnologías de Manofactura',_binary ''),(154,'Ingeniería en Tecnologías de Manofactura',_binary ''),(155,'Ingeniería en Tecnologías de Manofactura',_binary ''),(156,'Ingeniería en Tecnologías de Manofactura',_binary '');
 /*!40000 ALTER TABLE `carreras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +181,7 @@ CREATE TABLE `libros_inventario` (
 
 LOCK TABLES `libros_inventario` WRITE;
 /*!40000 ALTER TABLE `libros_inventario` DISABLE KEYS */;
-INSERT INTO `libros_inventario` VALUES (1,5,'Nuevo',_binary '\0'),(2,5,'Nuevo',_binary ''),(3,5,'Nuevo',_binary ''),(4,6,'Nuevo',_binary '\0'),(5,6,'Nuevo',_binary '');
+INSERT INTO `libros_inventario` VALUES (1,5,'Nuevo',_binary ''),(2,5,'Nuevo',_binary ''),(3,5,'Nuevo',_binary ''),(4,6,'Nuevo',_binary ''),(5,6,'Nuevo',_binary '');
 /*!40000 ALTER TABLE `libros_inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +284,7 @@ CREATE TABLE `prestamos` (
   KEY `FK_alumno_matricula_idx` (`alumno_matricula`),
   CONSTRAINT `FK_alumno_matricula` FOREIGN KEY (`alumno_matricula`) REFERENCES `alumnos` (`matricula`),
   CONSTRAINT `FK_libro_inv_id` FOREIGN KEY (`libro_inventario_id`) REFERENCES `libros_inventario` (`libro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +293,7 @@ CREATE TABLE `prestamos` (
 
 LOCK TABLES `prestamos` WRITE;
 /*!40000 ALTER TABLE `prestamos` DISABLE KEYS */;
-INSERT INTO `prestamos` VALUES (75,5,1930337,'2021-12-03 16:09:00','2021-12-03 16:10:00','2021-12-10 16:09:00',_binary ''),(76,6,1930337,'2021-12-03 16:10:00','2021-12-03 16:16:00','2021-12-10 16:10:00',_binary ''),(77,5,1930337,'2021-12-03 16:12:00','2021-12-03 16:12:00','2021-12-10 16:12:00',_binary ''),(78,5,1930337,'2021-12-03 16:15:00','2021-12-03 16:15:00','2021-12-10 16:15:00',_binary ''),(79,5,1930337,'2021-12-03 16:16:00',NULL,'2021-12-10 16:16:00',_binary ''),(80,6,1930337,'2021-12-03 16:17:00',NULL,'2021-12-10 16:17:00',_binary '');
+INSERT INTO `prestamos` VALUES (82,5,1930337,'2021-12-05 10:19:00','2021-12-05 11:10:00','2022-02-25 12:59:00',_binary ''),(83,6,1930337,'2021-01-05 10:19:00','2021-12-05 11:06:00','2022-02-25 12:59:00',_binary ''),(84,5,1930337,'2021-12-05 11:11:00','2021-12-05 11:33:00','2022-03-01 11:29:00',_binary ''),(85,6,1930337,'2021-01-05 11:13:00','2021-12-05 11:33:00','2022-04-10 10:20:00',_binary ''),(86,5,1930337,'2021-01-05 11:38:00','2021-12-05 11:39:00','2022-02-25 12:59:00',_binary '');
 /*!40000 ALTER TABLE `prestamos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,6 +349,80 @@ LOCK TABLES `tipos_recursos` WRITE;
 INSERT INTO `tipos_recursos` VALUES (1,'libro',_binary '');
 /*!40000 ALTER TABLE `tipos_recursos` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'biblioteca'
+--
+
+--
+-- Dumping routines for database 'biblioteca'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `insert_prestamo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_prestamo`(
+	in p_libro_inv int,
+    in p_alumno_mat int,
+    in p_fecha_prestamo datetime,
+    in p_fecha_devolver datetime,
+    out p_id int
+)
+BEGIN
+	INSERT INTO prestamos (
+		libro_inventario_id,
+		alumno_matricula,
+        fecha_prestamo,
+        fecha_debe_devolver,
+        disponible
+	) VALUES (
+		p_libro_inv,
+        p_alumno_mat,
+        p_fecha_prestamo,
+        p_fecha_devolver,
+        1
+    );
+    SELECT id INTO p_id FROM prestamos
+    WHERE libro_inventario_id = p_libro_inv AND
+    alumno_matricula = p_alumno_mat AND
+    fecha_prestamo = p_fecha_prestamo AND
+    fecha_debe_devolver = p_fecha_devolver;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `update_prestamo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_prestamo`(
+	in p_id int,
+    in p_fecha_devuelto datetime
+)
+BEGIN
+	UPDATE prestamos
+    SET fecha_devuelto = p_fecha_devuelto
+    WHERE id = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `alumnos_v`
@@ -440,14 +513,3 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-12-03 16:39:12

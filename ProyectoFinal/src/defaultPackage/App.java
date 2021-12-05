@@ -93,8 +93,11 @@ public class App {
             System.out.println("Se guardó la carrera y regresó id " + id);
             
             carreras = carreraDao.getAll();
+          
+            
             for (Carrera i : carreras) System.out.println(i);
             
+           
             System.out.println("actualizando registro con id 1");
             Carrera aActualizar = carreraDao.getById(1);
             aActualizar.setNombre("Ingeniería en Tecnologías de Información y Comunicaciones");

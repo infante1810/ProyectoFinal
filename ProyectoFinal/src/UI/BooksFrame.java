@@ -235,7 +235,7 @@ public class BooksFrame extends javax.swing.JPanel {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // Abrir sección
-        UpEditorial p1 = new UpEditorial();
+        UpBooks p1 = new UpBooks();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
 
@@ -255,7 +255,7 @@ public class BooksFrame extends javax.swing.JPanel {
 
     private void nuevoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMousePressed
         // Abrir sección
-        UpEditorial p1 = new UpEditorial();
+        UpBooks p1 = new UpBooks();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
 

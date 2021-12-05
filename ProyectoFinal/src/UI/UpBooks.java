@@ -6,7 +6,9 @@
 package UI;
 import java.awt.Color;
 import javax.swing.JPanel;
-
+import ComboBoxCustom.ComboBoxSugestion;
+import static UI.Dashboard.content;
+import java.awt.BorderLayout;
 /**
  *
  * @author a
@@ -30,13 +32,12 @@ public class UpBooks extends javax.swing.JPanel {
         edition = true;
  
         origId = bid;
-        id.setText(bid);
+       
         title.setText(btitle);
-        source.setText(bdate);
-        editionb.setText(bauthor);
+        
         authors.setText(bcategory);
         isbn.setText(bedit);
-        idEditorial.setText(blang);
+        
         stock.setText(bpages);  
         jLabel1.setText("Guardar");
     }
@@ -56,17 +57,9 @@ public class UpBooks extends javax.swing.JPanel {
         button = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Text3 = new javax.swing.JLabel();
-        id = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
         Text6 = new javax.swing.JLabel();
         title = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
-        Text7 = new javax.swing.JLabel();
-        source = new javax.swing.JTextField();
-        jSeparator8 = new javax.swing.JSeparator();
-        Text8 = new javax.swing.JLabel();
-        editionb = new javax.swing.JTextField();
-        jSeparator9 = new javax.swing.JSeparator();
         Text9 = new javax.swing.JLabel();
         authors = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
@@ -74,16 +67,17 @@ public class UpBooks extends javax.swing.JPanel {
         jSeparator11 = new javax.swing.JSeparator();
         Text10 = new javax.swing.JLabel();
         Text4 = new javax.swing.JLabel();
-        idEditorial = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
         Text11 = new javax.swing.JLabel();
         stock = new javax.swing.JTextField();
         jSeparator12 = new javax.swing.JSeparator();
         Text12 = new javax.swing.JLabel();
         state = new javax.swing.JTextField();
         jSeparator13 = new javax.swing.JSeparator();
+        CboxRecurso = new ComboBoxCustom.ComboBoxSugestion();
+        CboxEditorial = new ComboBoxCustom.ComboBoxSugestion();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setMinimumSize(new java.awt.Dimension(750, 430));
         setPreferredSize(new java.awt.Dimension(750, 430));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -104,6 +98,9 @@ public class UpBooks extends javax.swing.JPanel {
         button.setBackground(new java.awt.Color(16, 152, 173));
         button.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttonMouseEntered(evt);
             }
@@ -122,31 +119,11 @@ public class UpBooks extends javax.swing.JPanel {
         jLabel1.setText("Subir");
         button.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, 30));
 
-        add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 260, 50));
+        add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 260, 50));
 
         Text3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text3.setText("Libro ID");
+        Text3.setText("Tipo de recurso");
         add(Text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
-
-        id.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        id.setForeground(new java.awt.Color(102, 102, 102));
-        id.setText("Ingrese el ID del Libro");
-        id.setBorder(null);
-        id.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                idMousePressed(evt);
-            }
-        });
-        id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idActionPerformed(evt);
-            }
-        });
-        add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 260, 30));
-
-        jSeparator4.setForeground(new java.awt.Color(34, 184, 207));
-        jSeparator4.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 260, 10));
 
         Text6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text6.setText("Título");
@@ -172,57 +149,9 @@ public class UpBooks extends javax.swing.JPanel {
         jSeparator7.setPreferredSize(new java.awt.Dimension(200, 10));
         add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 260, 10));
 
-        Text7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text7.setText("Tipo de recurso");
-        add(Text7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
-
-        source.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        source.setForeground(new java.awt.Color(102, 102, 102));
-        source.setText("Ingrese tipo de recurso");
-        source.setBorder(null);
-        source.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                sourceMousePressed(evt);
-            }
-        });
-        source.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sourceActionPerformed(evt);
-            }
-        });
-        add(source, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 260, 30));
-
-        jSeparator8.setForeground(new java.awt.Color(34, 184, 207));
-        jSeparator8.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 260, 10));
-
-        Text8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text8.setText("Edicion");
-        add(Text8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
-
-        editionb.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        editionb.setForeground(new java.awt.Color(102, 102, 102));
-        editionb.setText("Ingrese numero edicion");
-        editionb.setBorder(null);
-        editionb.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                editionbMousePressed(evt);
-            }
-        });
-        editionb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editionbActionPerformed(evt);
-            }
-        });
-        add(editionb, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 260, 30));
-
-        jSeparator9.setForeground(new java.awt.Color(34, 184, 207));
-        jSeparator9.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 260, 10));
-
         Text9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text9.setText("Autores");
-        add(Text9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        add(Text9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         authors.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         authors.setForeground(new java.awt.Color(102, 102, 102));
@@ -238,11 +167,11 @@ public class UpBooks extends javax.swing.JPanel {
                 authorsActionPerformed(evt);
             }
         });
-        add(authors, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 260, 30));
+        add(authors, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 260, 30));
 
         jSeparator10.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator10.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 260, 10));
+        add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 260, 10));
 
         isbn.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         isbn.setForeground(new java.awt.Color(102, 102, 102));
@@ -258,43 +187,23 @@ public class UpBooks extends javax.swing.JPanel {
                 isbnActionPerformed(evt);
             }
         });
-        add(isbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 260, 30));
+        add(isbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 260, 30));
 
         jSeparator11.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator11.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 260, 10));
+        add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 260, 10));
 
         Text10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text10.setText("ISBN");
-        add(Text10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+        add(Text10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         Text4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text4.setText("Editorial ID");
-        add(Text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, -1, -1));
-
-        idEditorial.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        idEditorial.setForeground(new java.awt.Color(102, 102, 102));
-        idEditorial.setText("Ingrese el id del editorial");
-        idEditorial.setBorder(null);
-        idEditorial.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                idEditorialMousePressed(evt);
-            }
-        });
-        idEditorial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idEditorialActionPerformed(evt);
-            }
-        });
-        add(idEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 260, 30));
-
-        jSeparator5.setForeground(new java.awt.Color(34, 184, 207));
-        jSeparator5.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 260, 10));
+        Text4.setText("Editorial");
+        add(Text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, -1, -1));
 
         Text11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text11.setText("Stock");
-        add(Text11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        add(Text11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         stock.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         stock.setForeground(new java.awt.Color(102, 102, 102));
@@ -310,15 +219,15 @@ public class UpBooks extends javax.swing.JPanel {
                 stockActionPerformed(evt);
             }
         });
-        add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 260, 30));
+        add(stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 260, 30));
 
         jSeparator12.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator12.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 260, 10));
+        add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 260, 10));
 
         Text12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text12.setText("Estado");
-        add(Text12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
+        add(Text12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
         state.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         state.setForeground(new java.awt.Color(102, 102, 102));
@@ -337,11 +246,18 @@ public class UpBooks extends javax.swing.JPanel {
                 stateActionPerformed(evt);
             }
         });
-        add(state, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 260, 30));
+        add(state, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 260, 30));
 
         jSeparator13.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator13.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 260, 10));
+        add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 260, 10));
+
+        CboxRecurso.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        CboxRecurso.setName(""); // NOI18N
+        add(CboxRecurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 260, -1));
+
+        CboxEditorial.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        add(CboxEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 260, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseEntered
@@ -352,47 +268,13 @@ public class UpBooks extends javax.swing.JPanel {
         resetColor(button);
     }//GEN-LAST:event_buttonMouseExited
 
-    private void idMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMousePressed
-       if(id.getText().equals("Ingrese el ID del Libro"))
-        id.setText("");
-       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
-        title.setText("Ingrese el Título");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
-       if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
-        authors.setText("Ingrese nombre de autores");
-       if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
-        isbn.setText("Ingrese el ISBN");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
-       if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
-        stock.setText("Ingrese la cantidad de ejemplares");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese el estado del libro");
-       
-    }//GEN-LAST:event_idMousePressed
-
-    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idActionPerformed
-
     private void titleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleMousePressed
         if(title.getText().equals("Ingrese el Título"))
         title.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
        if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
         authors.setText("Ingrese nombre de autores");
        if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
         isbn.setText("Ingrese el ISBN");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
        if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
         stock.setText("Ingrese la cantidad de ejemplares");
        if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
@@ -404,73 +286,13 @@ public class UpBooks extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_titleActionPerformed
 
-    private void sourceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sourceMousePressed
-        if(source.getText().equals("Ingrese tipo de recurso"))
-        source.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
-       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
-        title.setText("Ingrese el Título");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
-       if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
-        authors.setText("Ingrese nombre de autores");
-       if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
-        isbn.setText("Ingrese el ISBN");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
-       if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
-        stock.setText("Ingrese la cantidad de ejemplares");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese el estado del libro");
-       
-    }//GEN-LAST:event_sourceMousePressed
-
-    private void sourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sourceActionPerformed
-
-    private void editionbMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editionbMousePressed
-        if(editionb.getText().equals("Ingrese numero edicion"))
-        editionb.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
-       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
-        title.setText("Ingrese el Título");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
-        authors.setText("Ingrese nombre de autores");
-       if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
-        isbn.setText("Ingrese el ISBN");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
-       if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
-        stock.setText("Ingrese la cantidad de ejemplares");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese el estado del libro");
-       
-    }//GEN-LAST:event_editionbMousePressed
-
-    private void editionbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editionbActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editionbActionPerformed
-
     private void authorsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_authorsMousePressed
         if(authors.getText().equals("Ingrese nombre de autores"))
         authors.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
-       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
-        title.setText("Ingrese el Título");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
        if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
         isbn.setText("Ingrese el ISBN");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
+       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
+        title.setText("Ingrese el Título");
        if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
         stock.setText("Ingrese la cantidad de ejemplares");
        if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
@@ -484,18 +306,10 @@ public class UpBooks extends javax.swing.JPanel {
     private void isbnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_isbnMousePressed
         if(isbn.getText().equals("Ingrese el ISBN"))
         isbn.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
-       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
-        title.setText("Ingrese el Título");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
        if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
         authors.setText("Ingrese nombre de autores");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
+       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
+        title.setText("Ingrese el Título");
        if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
         stock.setText("Ingrese la cantidad de ejemplares");
        if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
@@ -507,49 +321,16 @@ public class UpBooks extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_isbnActionPerformed
 
-    private void idEditorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idEditorialMousePressed
-       if(idEditorial.getText().equals("Ingrese el id del editorial"))
-        idEditorial.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
-       if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
-        title.setText("Ingrese el Título");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
-       if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
-        authors.setText("Ingrese nombre de autores");
-       if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
-        isbn.setText("Ingrese el ISBN");
-       if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
-        stock.setText("Ingrese la cantidad de ejemplares");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese el estado del libro");
-       
-    }//GEN-LAST:event_idEditorialMousePressed
-
-    private void idEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idEditorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idEditorialActionPerformed
-
     private void stockMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockMousePressed
         if(stock.getText().equals("Ingrese la cantidad de ejemplares"))
         stock.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
+       
        if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
         title.setText("Ingrese el Título");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
        if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
         authors.setText("Ingrese nombre de autores");
        if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
         isbn.setText("Ingrese el ISBN");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
        if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
         state.setText("Ingrese el estado del libro");
        
@@ -561,7 +342,14 @@ public class UpBooks extends javax.swing.JPanel {
 
     // SUBIR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
-        
+        Books p1 = new Books();
+        p1.setSize(750, 430);
+        p1.setLocation(0, 0);
+
+        content.removeAll();
+        content.add(p1, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
     }//GEN-LAST:event_buttonMousePressed
 
     private void stateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stateMousePressed
@@ -575,23 +363,19 @@ public class UpBooks extends javax.swing.JPanel {
     private void stateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stateMouseClicked
        if(state.getText().equals("Ingrese el estado del libro"))
         state.setText("");
-       if(id.getText().equals("") || id.getText() == null || id.getText().equals(" "))
-        id.setText("Ingrese el ID del Libro");
        if(title.getText().equals("") || title.getText() == null || title.getText().equals(" "))
         title.setText("Ingrese el Título");
-       if(source.getText().equals("") || source.getText() == null || source.getText().equals(" "))
-        source.setText("Ingrese tipo de recurso");
-       if(editionb.getText().equals("") || editionb.getText() == null || editionb.getText().equals(" "))
-        editionb.setText("Ingrese numero edicion");
        if(authors.getText().equals("") || authors.getText() == null || authors.getText().equals(" "))
         authors.setText("Ingrese nombre de autores");
-       if(idEditorial.getText().equals("") || idEditorial.getText() == null || idEditorial.getText().equals(" "))
-        idEditorial.setText("Ingrese el id del editorial");
        if(stock.getText().equals("") || stock.getText() == null || stock.getText().equals(" "))
         stock.setText("Ingrese la cantidad de ejemplares");
        if(isbn.getText().equals("") || isbn.getText() == null || isbn.getText().equals(" "))
         isbn.setText("Ingrese el ISBN");
     }//GEN-LAST:event_stateMouseClicked
+
+    private void buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseClicked
+        
+    }//GEN-LAST:event_buttonMouseClicked
 
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
@@ -604,22 +388,19 @@ public class UpBooks extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CboxEditorial;
+    private javax.swing.JComboBox<String> CboxRecurso;
     private javax.swing.JLabel Text10;
     private javax.swing.JLabel Text11;
     private javax.swing.JLabel Text12;
     private javax.swing.JLabel Text3;
     private javax.swing.JLabel Text4;
     private javax.swing.JLabel Text6;
-    private javax.swing.JLabel Text7;
-    private javax.swing.JLabel Text8;
     private javax.swing.JLabel Text9;
     private javax.swing.JLabel Title;
     private javax.swing.JTextField authors;
     private javax.swing.JPanel body;
     private javax.swing.JPanel button;
-    private javax.swing.JTextField editionb;
-    private javax.swing.JTextField id;
-    private javax.swing.JTextField idEditorial;
     private javax.swing.JTextField isbn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator10;
@@ -627,12 +408,7 @@ public class UpBooks extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField source;
     private javax.swing.JTextField state;
     private javax.swing.JTextField stock;
     private javax.swing.JTextField title;

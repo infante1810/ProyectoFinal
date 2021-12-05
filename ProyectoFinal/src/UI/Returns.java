@@ -39,6 +39,8 @@ public class Returns extends javax.swing.JPanel {
     private void initComponents() {
 
         body = new javax.swing.JPanel();
+        button1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         Title = new javax.swing.JLabel();
         Text1 = new javax.swing.JLabel();
         Text2 = new javax.swing.JLabel();
@@ -49,7 +51,8 @@ public class Returns extends javax.swing.JPanel {
         folio = new javax.swing.JTextField();
         button = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Image = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 430));
@@ -60,13 +63,36 @@ public class Returns extends javax.swing.JPanel {
         body.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        button1.setBackground(new java.awt.Color(16, 152, 173));
+        button1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        button1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                button1MousePressed(evt);
+            }
+        });
+        button1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Buscar");
+        button1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
+
+        add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 80, 30));
+
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         Title.setText("Devolución de Libro");
         add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         Text1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text1.setText("Libro ID");
-        add(Text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        Text1.setText("ISBN");
+        add(Text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         Text2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text2.setText("Matricula de Estudiante");
@@ -74,20 +100,19 @@ public class Returns extends javax.swing.JPanel {
 
         jSeparator1.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator1.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 260, 10));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 260, 10));
 
         jSeparator2.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator2.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 260, 10));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 170, 10));
 
         jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator3.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 10, 350));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 10, 350));
 
-        book_id.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         book_id.setForeground(new java.awt.Color(102, 102, 102));
-        book_id.setText("Ingrese el ID del Libro a devolver");
+        book_id.setText("Ingrese el ISBN del Libro a devolver");
         book_id.setBorder(null);
         book_id.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -99,18 +124,22 @@ public class Returns extends javax.swing.JPanel {
                 book_idActionPerformed(evt);
             }
         });
-        add(book_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 260, 30));
+        add(book_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 260, 30));
 
-        folio.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         folio.setForeground(new java.awt.Color(102, 102, 102));
-        folio.setText("Ingrese la matricula del estudiante");
+        folio.setText("Ingrese la matricula ");
         folio.setBorder(null);
         folio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 folioMousePressed(evt);
             }
         });
-        add(folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 260, 30));
+        folio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                folioActionPerformed(evt);
+            }
+        });
+        add(folio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 180, 30));
 
         button.setBackground(new java.awt.Color(16, 152, 173));
         button.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -135,11 +164,48 @@ public class Returns extends javax.swing.JPanel {
 
         add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 260, 50));
 
-        Image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageUI/iStock.jpg"))); // NOI18N
-        Image.setMaximumSize(new java.awt.Dimension(750, 430));
-        Image.setMinimumSize(new java.awt.Dimension(750, 430));
-        add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Título", "Fecha de devolución", "ISBN"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 380, 300));
     }// </editor-fold>//GEN-END:initComponents
 
     private void book_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_book_idActionPerformed
@@ -147,17 +213,17 @@ public class Returns extends javax.swing.JPanel {
     }//GEN-LAST:event_book_idActionPerformed
 
     private void folioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_folioMousePressed
-       if(folio.getText().equals("Ingrese la matricula del estudiante"))
+       if(folio.getText().equals("Ingrese la matricula "))
         folio.setText("");
        if(book_id.getText().equals("") || book_id.getText() == null || book_id.getText().equals(" "))
-        book_id.setText("Ingrese el ID del Libro a devolver");
+        book_id.setText("Ingrese el ISBN del Libro a devolver");
     }//GEN-LAST:event_folioMousePressed
 
     private void book_idMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_book_idMousePressed
-        if(book_id.getText().equals("Ingrese el ID del Libro a devolver"))
+        if(book_id.getText().equals("Ingrese el ISBN del Libro a devolver"))
             book_id.setText("");
         if(folio.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
-            folio.setText("Ingrese la matricula del estudiante");
+            folio.setText("Ingrese la matricula ");
     }//GEN-LAST:event_book_idMousePressed
 
     private void buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseEntered
@@ -240,6 +306,26 @@ public class Returns extends javax.swing.JPanel {
         
     }//GEN-LAST:event_buttonMousePressed
 
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void button1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseEntered
+        setColor(button);
+    }//GEN-LAST:event_button1MouseEntered
+
+    private void button1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseExited
+        resetColor(button);
+    }//GEN-LAST:event_button1MouseExited
+
+    private void button1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MousePressed
+
+    }//GEN-LAST:event_button1MousePressed
+
+    private void folioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_folioActionPerformed
+
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }
@@ -253,17 +339,20 @@ public class Returns extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Image;
     private javax.swing.JLabel Text1;
     private javax.swing.JLabel Text2;
     private javax.swing.JLabel Title;
     private javax.swing.JPanel body;
     private javax.swing.JTextField book_id;
     private javax.swing.JPanel button;
+    private javax.swing.JPanel button1;
     private javax.swing.JTextField folio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

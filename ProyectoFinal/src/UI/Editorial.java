@@ -61,11 +61,13 @@ public class Editorial extends javax.swing.JPanel {
         jSeparator2.setPreferredSize(new java.awt.Dimension(250, 10));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
 
-        bid.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         bid.setForeground(new java.awt.Color(102, 102, 102));
-        bid.setText("Ingrese el ID de la editorial");
+        bid.setText("Ingrese el nombre de editorial");
         bid.setBorder(null);
         bid.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bidMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 bidMousePressed(evt);
             }
@@ -172,30 +174,30 @@ public class Editorial extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre", "Pais", "Email", "Categoría", "Edición", "Activo"
+                "Nombre", "Pais", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -248,7 +250,7 @@ public class Editorial extends javax.swing.JPanel {
 
     private void nuevoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMousePressed
         // Abrir sección
-        UpUsers p1 = new UpUsers();
+        UpEditorial p1 = new UpEditorial();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
 
@@ -291,6 +293,11 @@ public class Editorial extends javax.swing.JPanel {
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
        
     }//GEN-LAST:event_buttonMousePressed
+
+    private void bidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMouseClicked
+        if(bid.getText().equals("Ingrese el nombre de editorial"))
+        bid.setText("");
+    }//GEN-LAST:event_bidMouseClicked
 
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));

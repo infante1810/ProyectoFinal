@@ -9,10 +9,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
-import dataaccess.*;
-import defaultPackage.App;
-import java.sql.Connection;
-import java.time.LocalDate;
 /**
  *
  * @author a
@@ -34,11 +30,11 @@ public class UpEditorial extends javax.swing.JPanel {
     public UpEditorial(String usid,String editorialId, String names, String countries, String emails, String states, String ustel) {
         initComponents();
         idus = usid;
-        Id.setText(editorialId);
+      
         name.setText(names);
         country.setText(countries);
         email.setText(emails);
-        state.setText(states);
+        
         edit = true;
         jLabel1.setText("Guardar");
     }
@@ -53,13 +49,9 @@ public class UpEditorial extends javax.swing.JPanel {
 
         body = new javax.swing.JPanel();
         Title = new javax.swing.JLabel();
-        Text2 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        state = new javax.swing.JTextField();
         button = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Text3 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         Text4 = new javax.swing.JLabel();
@@ -69,8 +61,6 @@ public class UpEditorial extends javax.swing.JPanel {
         email = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         Text6 = new javax.swing.JLabel();
-        Id = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 430));
@@ -85,33 +75,10 @@ public class UpEditorial extends javax.swing.JPanel {
         Title.setText("Registrar nuevo Editorial");
         add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        Text2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text2.setText("Activa");
-        add(Text2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
-
-        jSeparator2.setForeground(new java.awt.Color(34, 184, 207));
-        jSeparator2.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 260, 10));
-
         jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator3.setPreferredSize(new java.awt.Dimension(200, 10));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 10, 350));
-
-        state.setForeground(new java.awt.Color(102, 102, 102));
-        state.setText("Ingrese estado de editorial");
-        state.setBorder(null);
-        state.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                stateMousePressed(evt);
-            }
-        });
-        state.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stateActionPerformed(evt);
-            }
-        });
-        add(state, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 260, 30));
 
         button.setBackground(new java.awt.Color(16, 152, 173));
         button.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -134,12 +101,9 @@ public class UpEditorial extends javax.swing.JPanel {
         jLabel1.setText("Registrar");
         button.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
-        add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 260, 50));
+        add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 260, 50));
 
-        Text3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text3.setText("Editorial ID");
-        add(Text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-
+        name.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         name.setForeground(new java.awt.Color(102, 102, 102));
         name.setText("Ingrese el nombre");
         name.setBorder(null);
@@ -153,16 +117,17 @@ public class UpEditorial extends javax.swing.JPanel {
                 nameActionPerformed(evt);
             }
         });
-        add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 260, 30));
+        add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 260, 30));
 
         jSeparator4.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator4.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 260, 10));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 10));
 
         Text4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text4.setText("Pais");
-        add(Text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        add(Text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
+        country.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         country.setForeground(new java.awt.Color(102, 102, 102));
         country.setText("Ingrese Pais");
         country.setBorder(null);
@@ -176,16 +141,17 @@ public class UpEditorial extends javax.swing.JPanel {
                 countryActionPerformed(evt);
             }
         });
-        add(country, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 260, 30));
+        add(country, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 260, 30));
 
         jSeparator5.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator5.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 260, 10));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 260, 10));
 
         Text5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text5.setText("Email");
-        add(Text5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        add(Text5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
+        email.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         email.setForeground(new java.awt.Color(102, 102, 102));
         email.setText("Ingrese email");
         email.setBorder(null);
@@ -199,50 +165,16 @@ public class UpEditorial extends javax.swing.JPanel {
                 emailActionPerformed(evt);
             }
         });
-        add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 260, 30));
+        add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 260, 30));
 
         jSeparator6.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator6.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 260, 10));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 260, 10));
 
         Text6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text6.setText("Nombre");
-        add(Text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
-
-        Id.setForeground(new java.awt.Color(102, 102, 102));
-        Id.setText("Ingrese ID");
-        Id.setBorder(null);
-        Id.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                IdMousePressed(evt);
-            }
-        });
-        Id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdActionPerformed(evt);
-            }
-        });
-        add(Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 260, 30));
-
-        jSeparator7.setForeground(new java.awt.Color(34, 184, 207));
-        jSeparator7.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 260, 10));
+        add(Text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void stateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stateMousePressed
-       if(state.getText().equals("Ingrese estado de editorial"))
-        state.setText("");
-       if(name.getText().equals("") || name.getText() == null || name.getText().equals(" "))
-        name.setText("Ingrese el nombre");
-       if(country.getText().equals("") || country.getText() == null || country.getText().equals(" "))
-        country.setText("Ingrese Pais");
-       if(email.getText().equals("") || email.getText() == null || email.getText().equals(" "))
-        email.setText("Ingrese email");
-       if(Id.getText().equals("") || Id.getText() == null || Id.getText().equals(" "))
-        Id.setText("Ingrese ID");
-       
-       
-    }//GEN-LAST:event_stateMousePressed
 
     private void buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseEntered
         setColor(button);
@@ -253,30 +185,25 @@ public class UpEditorial extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonMouseExited
 
     private void nameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMousePressed
-       if(Id.getText().equals("") || Id.getText() == null || Id.getText().equals(" "))
-        Id.setText("Ingrese ID");
+       
        if(name.getText().equals("Ingrese el nombre"))
         name.setText("");
        if(country.getText().equals("") || country.getText() == null || country.getText().equals(" "))
         country.setText("Ingrese Pais");
        if(email.getText().equals("") || email.getText() == null || email.getText().equals(" "))
         email.setText("Ingrese email");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese estado de editorial");
+      
        
     }//GEN-LAST:event_nameMousePressed
 
     private void countryMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_countryMousePressed
-        if(Id.getText().equals("") || Id.getText() == null || Id.getText().equals(" "))
-         Id.setText("Ingrese ID");
+       
         if(name.getText().equals("") || name.getText() == null || name.getText().equals(" "))
         name.setText("Ingrese el nombre");
        if(country.getText().equals("Ingrese Pais"))
         country.setText("");
        if(email.getText().equals("") || email.getText() == null || email.getText().equals(" "))
         email.setText("Ingrese email");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese estado de editorial");
        
     }//GEN-LAST:event_countryMousePressed
 
@@ -285,16 +212,14 @@ public class UpEditorial extends javax.swing.JPanel {
     }//GEN-LAST:event_countryActionPerformed
 
     private void emailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMousePressed
-       if(Id.getText().equals("") || Id.getText() == null || Id.getText().equals(" "))
-        Id.setText("Ingrese ID");
+       
        if(name.getText().equals("") || name.getText() == null || name.getText().equals(" "))
         name.setText("Ingrese el nombre");
        if(email.getText().equals("Ingrese email"))
         email.setText("");
        if(country.getText().equals("") || country.getText() == null || country.getText().equals(" "))
         country.setText("Ingrese Pais");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese estado de editorial");
+       
       
     }//GEN-LAST:event_emailMousePressed
 
@@ -305,22 +230,10 @@ public class UpEditorial extends javax.swing.JPanel {
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
-
-    private void stateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stateActionPerformed
     // REGISTRAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
         
-        Users p1 = new Users();
-        Editorial a = new Editorial();
-        a.setNombre(name.getText());
-        a.setPais(country.getText());
-        a.setEmail(email.getText());
-        a.setActivo(true);
-        
-        addEditorial(a);
-        
+        Editorial p1 = new Editorial();
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
 
@@ -332,25 +245,6 @@ public class UpEditorial extends javax.swing.JPanel {
           
     }//GEN-LAST:event_buttonMousePressed
 
-    private void IdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IdMousePressed
-       
-        if(Id.getText().equals("Ingrese ID"))
-        Id.setText("");
-       if(name.getText().equals("") || name.getText() == null || name.getText().equals(" "))
-        name.setText("Ingrese el nombre");
-       if(country.getText().equals("") || country.getText() == null || country.getText().equals(" "))
-        country.setText("Ingrese Pais");
-       if(email.getText().equals("") || email.getText() == null || email.getText().equals(" "))
-        email.setText("Ingrese email");
-       if(state.getText().equals("") || state.getText() == null || state.getText().equals(" "))
-        state.setText("Ingrese estado de editorial");
-       
-    }//GEN-LAST:event_IdMousePressed
-
-    private void IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IdActionPerformed
-
    void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }
@@ -360,9 +254,6 @@ public class UpEditorial extends javax.swing.JPanel {
     
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Id;
-    private javax.swing.JLabel Text2;
-    private javax.swing.JLabel Text3;
     private javax.swing.JLabel Text4;
     private javax.swing.JLabel Text5;
     private javax.swing.JLabel Text6;
@@ -372,23 +263,10 @@ public class UpEditorial extends javax.swing.JPanel {
     private javax.swing.JTextField country;
     private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField state;
     // End of variables declaration//GEN-END:variables
-
-    private void addEditorial(Editorial a) {
-        try (Connection connection = App.getConnection()) {
-            EditorialDao editorialDao = App.getEditoriaDao(connection);
-            editorialDao.insert(a);
-        } 
-        catch (Exception ex) {
-            System.out.println("Problema cargar Libro");
-        }
-    }
 }

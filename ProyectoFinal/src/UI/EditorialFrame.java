@@ -4,26 +4,19 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
 import java.awt.BorderLayout;
-import dataaccess.*;
-import java.sql.Connection;
-import javax.swing.table.DefaultTableModel;
-import defaultPackage.*;
 
 /**
  *
  * @author a
  */
-public class EditorialFrame extends javax.swing.JPanel {
+public class Books extends javax.swing.JPanel {
 
-    private Editorial[] editoriales;
     
     /**
      * Creates new form Principal
      */
-    public EditorialFrame() {
-        
+    public Books() {
         initComponents();
-        consultarEditoriales();
        
     }
 
@@ -61,7 +54,7 @@ public class EditorialFrame extends javax.swing.JPanel {
         add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Title.setText("Editorial");
+        Title.setText("Libros");
         add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(34, 184, 207));
@@ -69,7 +62,7 @@ public class EditorialFrame extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
 
         bid.setForeground(new java.awt.Color(102, 102, 102));
-        bid.setText("Ingrese el ID de la editorial");
+        bid.setText("Ingrese el ID del Libro a buscar");
         bid.setBorder(null);
         bid.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -178,30 +171,30 @@ public class EditorialFrame extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Pais", "Email"
+                "Título", "Tipo", "Autores", "ISBN", "Disponibles"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -234,7 +227,7 @@ public class EditorialFrame extends javax.swing.JPanel {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // Abrir sección
-        UpEditorial p1 = new UpEditorial();
+        UpBooks p1 = new UpBooks();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
 
@@ -254,7 +247,7 @@ public class EditorialFrame extends javax.swing.JPanel {
 
     private void nuevoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMousePressed
         // Abrir sección
-        UpUsers p1 = new UpUsers();
+        UpBooks p1 = new UpBooks();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
 
@@ -298,45 +291,6 @@ public class EditorialFrame extends javax.swing.JPanel {
        
     }//GEN-LAST:event_buttonMousePressed
 
-    private void consultarEditoriales() {
-        editoriales = null;
-        try (Connection connection = App.getConnection()) {
-            EditorialDao editorialDao = App.getEditoriaDao(connection);
-//We get a connection stable here
-            editoriales = editorialDao.getAll();
-        } 
-        catch (Exception ex) {
-            System.out.println("Problema cargar Editorial");
-        }
-        try{
-            cargarTblEditoriales();
-        }
-        catch (Exception e){
-            System.out.println("Problema cargarTBLEditoriales");
-        }
-        
-    }
-    private void cargarTblEditoriales() {
-        
-        DefaultTableModel tblModel = (
-                DefaultTableModel)jTable1.getModel();
-        
-        while (tblModel.getRowCount() != 0) tblModel.removeRow(0);
-        
-        if (editoriales == null) return;
-        
-        for (int i = 0; i < editoriales.length; i++) {
-            tblModel.insertRow(i, toRow(editoriales[i]));
-        }
-        
-    }
-    
-    private Object[] toRow(Editorial i) {
-        return new Object[] {
-            i.getNombre(), i.getPais(), i.getEmail()
-        };
-    }
-    
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }

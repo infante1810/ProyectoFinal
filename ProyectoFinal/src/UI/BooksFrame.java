@@ -1,27 +1,23 @@
 package UI;
 
-import defaultPackage.*;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
 import java.awt.BorderLayout;
-import dataaccess.*;
-import java.sql.Connection;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author a
  */
-public class BooksFrame extends javax.swing.JPanel {
-    private Libro[] libros;
+public class Editorial extends javax.swing.JPanel {
+
     
     /**
      * Creates new form Principal
      */
-    public BooksFrame() {
+    public Editorial() {
         initComponents();
-        consultarLibros();
+       
     }
 
     /**
@@ -58,7 +54,7 @@ public class BooksFrame extends javax.swing.JPanel {
         add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Title.setText("Libros");
+        Title.setText("Editorial");
         add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(34, 184, 207));
@@ -66,9 +62,12 @@ public class BooksFrame extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
 
         bid.setForeground(new java.awt.Color(102, 102, 102));
-        bid.setText("Ingrese el ID del Libro a buscar");
+        bid.setText("Ingrese el nombre de editorial");
         bid.setBorder(null);
         bid.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bidMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 bidMousePressed(evt);
             }
@@ -175,14 +174,30 @@ public class BooksFrame extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Titulo", "Tipo", "Autores", "ISBN", "Disponibles"
+                "Nombre", "Pais", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -215,7 +230,7 @@ public class BooksFrame extends javax.swing.JPanel {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // Abrir sección
-        UpBooks p1 = new UpBooks();
+        UpEditorial p1 = new UpEditorial();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
 
@@ -235,7 +250,7 @@ public class BooksFrame extends javax.swing.JPanel {
 
     private void nuevoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMousePressed
         // Abrir sección
-        UpUsers p1 = new UpUsers();
+        UpEditorial p1 = new UpEditorial();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
 
@@ -279,43 +294,11 @@ public class BooksFrame extends javax.swing.JPanel {
        
     }//GEN-LAST:event_buttonMousePressed
 
-    private void consultarLibros() {
-        libros = null;
-        try (Connection connection = App.getConnection()) {
-            LibroDao libroDao = App.getLibroDao(connection);
-            libros = libroDao.getAll();
-        } 
-        catch (Exception ex) {
-            System.out.println("Problema cargar Libro");
-        }
-        try{
-            cargarTblLibros();
-        }
-        catch (Exception e){
-            System.out.println("Problema cargarTBLibros");
-        }
-    }
-    private void cargarTblLibros() {
-        
-        DefaultTableModel tblModel = (
-                DefaultTableModel)jTable1.getModel();
-        
-        while (tblModel.getRowCount() != 0) tblModel.removeRow(0);
-        
-        if (libros == null) return;
-        
-        for (int i = 0; i < libros.length; i++) {
-            tblModel.insertRow(i, toRow(libros[i]));
-        }
-        
-    }
-    
-    private Object[] toRow(Libro i) {
-        return new Object[] {
-            i.getTitulo(),i.getEdicion(),i.getTipoRecursoId(),i.getEdicion(),i.getEditorialId(),i.getAutores(),i.getIsbn(),i.isActivo()
-        };
-    }
-    
+    private void bidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMouseClicked
+        if(bid.getText().equals("Ingrese el nombre de editorial"))
+        bid.setText("");
+    }//GEN-LAST:event_bidMouseClicked
+
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }

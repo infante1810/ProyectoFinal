@@ -40,13 +40,16 @@ public class Lendings extends javax.swing.JPanel {
     private void initComponents() {
 
         body = new javax.swing.JPanel();
+        Text3 = new javax.swing.JLabel();
         Title = new javax.swing.JLabel();
         Text1 = new javax.swing.JLabel();
         Text2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         book_id = new javax.swing.JTextField();
+        book_return = new javax.swing.JTextField();
         folio = new javax.swing.JTextField();
         button = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -61,13 +64,17 @@ public class Lendings extends javax.swing.JPanel {
         body.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        Text3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text3.setText("Fecha de devolucion");
+        add(Text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, -1, -1));
+
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         Title.setText("Nuevo Préstamo");
         add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         Text1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text1.setText("Libro ID");
-        add(Text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, -1, -1));
+        Text1.setText("ISBN");
+        add(Text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
 
         Text2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text2.setText("Matricula Estudiante");
@@ -75,7 +82,7 @@ public class Lendings extends javax.swing.JPanel {
 
         jSeparator1.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator1.setPreferredSize(new java.awt.Dimension(200, 10));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 260, 10));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 260, 10));
 
         jSeparator2.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator2.setPreferredSize(new java.awt.Dimension(200, 10));
@@ -86,9 +93,12 @@ public class Lendings extends javax.swing.JPanel {
         jSeparator3.setPreferredSize(new java.awt.Dimension(200, 10));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 10, 350));
 
-        book_id.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jSeparator4.setForeground(new java.awt.Color(34, 184, 207));
+        jSeparator4.setPreferredSize(new java.awt.Dimension(200, 10));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 260, 10));
+
         book_id.setForeground(new java.awt.Color(102, 102, 102));
-        book_id.setText("Ingrese el ID del Libro a prestar");
+        book_id.setText("Ingrese el ISBN del Libro a prestar");
         book_id.setBorder(null);
         book_id.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -100,9 +110,23 @@ public class Lendings extends javax.swing.JPanel {
                 book_idActionPerformed(evt);
             }
         });
-        add(book_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 260, 30));
+        add(book_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 260, 30));
 
-        folio.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        book_return.setForeground(new java.awt.Color(102, 102, 102));
+        book_return.setText("yyyy-MM-dd HH:mm");
+        book_return.setBorder(null);
+        book_return.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                book_returnMousePressed(evt);
+            }
+        });
+        book_return.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                book_returnActionPerformed(evt);
+            }
+        });
+        add(book_return, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 260, 30));
+
         folio.setForeground(new java.awt.Color(102, 102, 102));
         folio.setText("Ingrese la matricula del estudiante");
         folio.setBorder(null);
@@ -139,7 +163,7 @@ public class Lendings extends javax.swing.JPanel {
         jLabel1.setText("Prestar");
         button.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
-        add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 260, 50));
+        add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 260, 50));
 
         Image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageUI/prestamo.gif"))); // NOI18N
@@ -156,14 +180,18 @@ public class Lendings extends javax.swing.JPanel {
        if(folio.getText().equals("Ingrese la matricula del estudiante"))
         folio.setText("");
        if(book_id.getText().equals("") || book_id.getText() == null || book_id.getText().equals(" "))
-        book_id.setText("Ingrese el ID del Libro a prestar");
+        book_id.setText("Ingrese el ISBN del Libro a prestar");
+       if(book_return.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
+            book_return.setText("(\"yyyy-MM-dd HH:mm");
     }//GEN-LAST:event_folioMousePressed
 
     private void book_idMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_book_idMousePressed
-        if(book_id.getText().equals("Ingrese el ID del Libro a prestar"))
+        if(book_id.getText().equals("Ingrese el ISBN del Libro a prestar"))
             book_id.setText("");
         if(folio.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
             folio.setText("Ingrese la matricula del estudiante");
+        if(book_return.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
+            book_return.setText("(\"yyyy-MM-dd HH:mm");
     }//GEN-LAST:event_book_idMousePressed
 
     private void buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseEntered
@@ -178,13 +206,17 @@ public class Lendings extends javax.swing.JPanel {
        
         try (Connection connection = getConnection()) {
             
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String book = book_id.getText();
             int matricula = 0;
+            String fechaEntregaStr = book_return.getText();
+            LocalDateTime fechaEntrega = null;
             
             try {
+                fechaEntrega = LocalDateTime.parse(fechaEntregaStr, formatoFecha);
                 matricula = Integer.parseInt(folio.getText());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Matricula Invalida");
+                JOptionPane.showMessageDialog(this, "Datos introducidos invalidos, verifique la matricula o la fecha");
                 return;
             }
             
@@ -225,7 +257,6 @@ public class Lendings extends javax.swing.JPanel {
                 return;
             }
             
-            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String fechaStr = formatoFecha.format(LocalDateTime.now());
             LocalDateTime fechaHoy = LocalDateTime.parse(fechaStr, formatoFecha);
             
@@ -235,11 +266,11 @@ public class Lendings extends javax.swing.JPanel {
             prestamo.setLibroInventarioId(rLibro.getInt("id"));
             prestamo.setAlumnoId(rAlumno.getInt("matricula"));
             prestamo.setFechaPrestamo(fechaHoy);
-            prestamo.setFechaDebeDevolver(getFechaAEntregar(fechaHoy));
+            prestamo.setFechaDebeDevolver(fechaEntrega);
             prestamo.setFechaDevuelto(null);
             int id = prestamoDao.insert(prestamo);
             JOptionPane.showMessageDialog(
-                    this, "Prestamo del libro " + rLibro.getString("titulo") + "realizado con exito. Se tiene que devolver a dia " + getFechaAEntregar(fechaHoy));
+                    this, "Prestamo del libro " + rLibro.getString("titulo") + " realizado con exito. Se tiene que devolver a dia " + fechaEntrega);
             
             String sqlLibroInv = 
                     "SELECT libro_inventario_id FROM prestamos WHERE id = ?";
@@ -278,6 +309,19 @@ public class Lendings extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_folioActionPerformed
 
+    private void book_returnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_book_returnMousePressed
+         if(book_return.getText().equals("yyyy-MM-dd HH:mm"))
+            book_return.setText("");
+        if(folio.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
+            folio.setText("Ingrese la matricula del estudiante");
+        if(book_id.getText().equals("") || folio.getText() == null || folio.getText().equals(" "))
+            book_id.setText("Ingrese el ISBN del Libro a prestar");
+    }//GEN-LAST:event_book_returnMousePressed
+
+    private void book_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_book_returnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_book_returnActionPerformed
+
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }
@@ -290,26 +334,23 @@ public class Lendings extends javax.swing.JPanel {
         return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
     }
     
-    private LocalDateTime getFechaAEntregar(LocalDateTime fecha) {
-        
-        return fecha.plusDays(7);
-        
-    }
-    
     
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
     private javax.swing.JLabel Text1;
     private javax.swing.JLabel Text2;
+    private javax.swing.JLabel Text3;
     private javax.swing.JLabel Title;
     private javax.swing.JPanel body;
     private javax.swing.JTextField book_id;
+    private javax.swing.JTextField book_return;
     private javax.swing.JPanel button;
     private javax.swing.JTextField folio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     // End of variables declaration//GEN-END:variables
 }

@@ -342,7 +342,7 @@ public class UpBooks extends javax.swing.JPanel {
 
     // SUBIR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
-        Books p1 = new Books();
+        BooksFrame p1 = new BooksFrame();
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
 

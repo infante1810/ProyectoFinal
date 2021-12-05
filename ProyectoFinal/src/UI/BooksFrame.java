@@ -9,13 +9,13 @@ import java.awt.BorderLayout;
  *
  * @author a
  */
-public class Editorial extends javax.swing.JPanel {
+public class BooksFrame extends javax.swing.JPanel {
 
     
     /**
      * Creates new form Principal
      */
-    public Editorial() {
+    public BooksFrame() {
         initComponents();
        
     }

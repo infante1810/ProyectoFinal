@@ -233,7 +233,7 @@ public class UpEditorial extends javax.swing.JPanel {
     // REGISTRAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
         
-        Editorial p1 = new Editorial();
+        EditorialFrame p1 = new EditorialFrame();
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
 

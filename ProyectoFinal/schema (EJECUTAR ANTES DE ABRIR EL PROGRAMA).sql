@@ -455,6 +455,24 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure delete_editorial
+-- -----------------------------------------------------
+DELIMITER ;
+USE `biblioteca`;
+DROP procedure IF EXISTS `delete_editorial`;
+
+DELIMITER $$
+USE `biblioteca`$$
+CREATE  PROCEDURE `delete_editorial`(
+	IN p_id int
+)
+BEGIN
+	DELETE FROM editoriales WHERE id = p_id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- procedure insert_libro
 -- -----------------------------------------------------
 DELIMITER ;

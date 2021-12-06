@@ -294,7 +294,6 @@ public class EditorialFrame extends javax.swing.JPanel {
         DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
         if(jTable1.getSelectedRow() != -1){
             int idSeleccionado = (int) tblModel.getValueAt(jTable1.getSelectedRow(), 3);
-             
             try(Connection connection = App.getConnection()){
                 EditorialDao editorialDao = App.getEditoriaDao(connection);
                 editorialDao.Delete(idSeleccionado);

@@ -367,14 +367,14 @@ public class UpBooks extends javax.swing.JPanel {
         boolean activo = ((this.state.getText()).equals("1") || ((this.state.getText()).toUpperCase()).equals("ACTIVO"));
         
         if(checkText(titulo) == true && checkText(autores) && checkText(isbn) && checkText(this.stock.getText()) && checkText((state.getText()))){
-        BooksFrame p1 = new BooksFrame();
-        p1.setSize(750, 430);
-        p1.setLocation(0, 0);
-        subirLibros(titulo, tipo, stock, editorial, autores, isbn, activo);
-        content.removeAll();
-        content.add(p1, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();            
+            subirLibros(titulo, tipo, stock, editorial, autores, isbn, activo);
+            BooksFrame p1 = new BooksFrame();
+            p1.setSize(750, 430);
+            p1.setLocation(0, 0);            
+            content.removeAll();
+            content.add(p1, BorderLayout.CENTER);
+            content.revalidate();
+            content.repaint();            
         }else{
              JOptionPane.showMessageDialog(new JFrame(), "No deje espacios vacios", "Error",
                 JOptionPane.ERROR_MESSAGE);

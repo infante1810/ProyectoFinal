@@ -9,6 +9,7 @@ import dataaccess.*;
 import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 import defaultPackage.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -184,30 +185,30 @@ public class EditorialFrame extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Pais", "Email"
+                "Nombre", "Pais", "Email", "ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -222,7 +223,7 @@ public class EditorialFrame extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 760, 300));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1020, 300));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bidMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMousePressed
@@ -290,11 +291,54 @@ public class EditorialFrame extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MousePressed
     // BORRAR
     private void deleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMousePressed
+        DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+        if(jTable1.getSelectedRow() != -1){
+            int idSeleccionado = (int) tblModel.getValueAt(jTable1.getSelectedRow(), 3);
+             
+            try(Connection connection = App.getConnection()){
+                EditorialDao editorialDao = App.getEditoriaDao(connection);
+                editorialDao.Delete(idSeleccionado);
+            }
+            catch(Exception e){   
+            }
+        }else{
+           JOptionPane.showMessageDialog(
+                    this, "Seleccione Un Archivo", "Archivo No Seleccionado",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+   
+        consultarEditoriales();
        
     }//GEN-LAST:event_deleteMousePressed
 
     // EDITAR
     private void editMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMousePressed
+        DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+        if(jTable1.getSelectedRow() != -1){
+            int idSeleccionado = (int) tblModel.getValueAt(jTable1.getSelectedRow(), 3);
+            String nombre = (String) tblModel.getValueAt(jTable1.getSelectedRow(), 0);
+            String pais = (String) tblModel.getValueAt(jTable1.getSelectedRow(), 1);
+            String email = (String) tblModel.getValueAt(jTable1.getSelectedRow(), 2);
+            
+             
+            try{
+                 
+                 UpEditorial p1 = new UpEditorial(idSeleccionado,nombre,pais,email);
+                 p1.setSize(750, 430);
+                 p1.setLocation(0,0);
+                 content.removeAll();
+                 content.add(p1, BorderLayout.CENTER);
+                 content.revalidate();
+                 content.repaint();
+            }
+            catch(Exception e){   
+            }
+        }else{
+           JOptionPane.showMessageDialog(
+                    this, "Seleccione Un Archivo", "Archivo No Seleccionado",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+        
        
     }//GEN-LAST:event_editMousePressed
     // BUSCAR
@@ -381,9 +425,10 @@ public class EditorialFrame extends javax.swing.JPanel {
     
     private Object[] toRow(Editorial i) {
         return new Object[] {
-            i.getNombre(), i.getPais(), i.getEmail()
+            i.getNombre(), i.getPais(), i.getEmail(), i.getId()
         };
     }
+    
     
     
     

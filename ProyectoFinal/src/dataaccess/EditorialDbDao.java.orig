@@ -58,7 +58,7 @@ public class EditorialDbDao implements EditorialDao{
         return editorial.toArray(new Editorial[]{});
     }
      
-
+<<<<<<< HEAD
      public int getIdEditorial(String nombreEditorial) throws Exception {
         //Implementacion de metodo getall
         int idObtener;
@@ -68,10 +68,10 @@ public class EditorialDbDao implements EditorialDao{
         
         return idObtener;
     }
-   
-
+     
+=======
     
-
+>>>>>>> 9ad947b32bce7d8abf185a2673bdbbbc8217d671
     
     @Override
     public Editorial[] getAll() throws Exception {
@@ -133,6 +133,7 @@ public class EditorialDbDao implements EditorialDao{
         return i.getId();
     }
     
+
     @Override
     public void Delete(int i) throws Exception {
         //Implementacion de insert
@@ -185,3 +186,4 @@ public class EditorialDbDao implements EditorialDao{
     }
 
 }
+

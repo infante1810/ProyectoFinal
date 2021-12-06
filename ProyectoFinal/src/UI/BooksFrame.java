@@ -40,7 +40,7 @@ public class BooksFrame extends javax.swing.JPanel {
         bid = new javax.swing.JTextField();
         button = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nuevo = new javax.swing.JPanel();
+        nuevo2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         edit = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -59,7 +59,7 @@ public class BooksFrame extends javax.swing.JPanel {
         add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Title.setText("Editorial");
+        Title.setText("Libros");
         add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(34, 184, 207));
@@ -67,12 +67,9 @@ public class BooksFrame extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
 
         bid.setForeground(new java.awt.Color(102, 102, 102));
-        bid.setText("Ingrese el nombre de editorial");
+        bid.setText("Ingrese el ID del Libro a buscar");
         bid.setBorder(null);
         bid.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bidMouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 bidMousePressed(evt);
             }
@@ -102,20 +99,23 @@ public class BooksFrame extends javax.swing.JPanel {
 
         add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 80, 30));
 
-        nuevo.setBackground(new java.awt.Color(16, 152, 173));
-        nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+        nuevo2.setBackground(new java.awt.Color(16, 152, 173));
+        nuevo2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nuevo2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nuevo2MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                nuevoMouseEntered(evt);
+                nuevo2MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                nuevoMouseExited(evt);
+                nuevo2MouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                nuevoMousePressed(evt);
+                nuevo2MousePressed(evt);
             }
         });
-        nuevo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        nuevo2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,9 +126,9 @@ public class BooksFrame extends javax.swing.JPanel {
                 jLabel3MousePressed(evt);
             }
         });
-        nuevo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
+        nuevo2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
 
-        add(nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 395, 80, -1));
+        add(nuevo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 395, 80, -1));
 
         edit.setBackground(new java.awt.Color(16, 152, 173));
         edit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -179,30 +179,30 @@ public class BooksFrame extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Pais", "Email"
+                "Título", "Tipo", "Autores", "ISBN", "Disponibles"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -245,25 +245,17 @@ public class BooksFrame extends javax.swing.JPanel {
         content.repaint();
     }//GEN-LAST:event_jLabel3MousePressed
 
-    private void nuevoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMouseEntered
+    private void nuevo2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo2MouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_nuevoMouseEntered
+    }//GEN-LAST:event_nuevo2MouseEntered
 
-    private void nuevoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMouseExited
+    private void nuevo2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo2MouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_nuevoMouseExited
+    }//GEN-LAST:event_nuevo2MouseExited
 
-    private void nuevoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMousePressed
-        // Abrir sección
-        UpBooks p1 = new UpBooks();
-        p1.setSize(750, 430);
-        p1.setLocation(0,0);
-
-        content.removeAll();
-        content.add(p1, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
-    }//GEN-LAST:event_nuevoMousePressed
+    private void nuevo2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo2MousePressed
+       
+    }//GEN-LAST:event_nuevo2MousePressed
 
     private void editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseEntered
         // TODO add your handling code here:
@@ -303,6 +295,10 @@ public class BooksFrame extends javax.swing.JPanel {
         if(bid.getText().equals("Ingrese el nombre de editorial"))
         bid.setText("");
     }//GEN-LAST:event_bidMouseClicked
+
+    private void nuevo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevo2MouseClicked
     
     private void consultarLibros() {
         libros = null;
@@ -363,6 +359,6 @@ public class BooksFrame extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JPanel nuevo;
+    private javax.swing.JPanel nuevo2;
     // End of variables declaration//GEN-END:variables
 }

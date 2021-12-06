@@ -507,7 +507,7 @@ public class Dashboard extends javax.swing.JFrame {
         setColor(btn_books);
         
         // Abrir sección
-        EditorialFrame p1 = new EditorialFrame();
+        BooksFrame p1 = new BooksFrame();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
         
@@ -615,7 +615,7 @@ public class Dashboard extends javax.swing.JFrame {
         resetColor(btn_users);
         resetColor(btn_books);
         // Abrir sección
-        BooksFrame p1 = new BooksFrame();
+        EditorialFrame p1 = new EditorialFrame();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
         

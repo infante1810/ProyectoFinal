@@ -305,7 +305,7 @@ public class BooksFrame extends javax.swing.JPanel {
         libroBusqueda = null;
         try (Connection connection = App.getConnection()) {
            LibroDao libroDao = App.getLibroDao(connection);
-           libros = libroDao.getByName(busqueda);
+           libroBusqueda = libroDao.getByName(busqueda);
         } 
         catch (Exception ex) {
             System.out.println("Problema cargar Editorial1");
@@ -344,6 +344,7 @@ public class BooksFrame extends javax.swing.JPanel {
         if (libroBusqueda == null) return;
         
         for (int i = 0; i < libroBusqueda.length; i++) {
+             
             tblModel.insertRow(i, toRow(libroBusqueda[i]));
         }
         

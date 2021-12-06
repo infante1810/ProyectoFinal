@@ -15,7 +15,7 @@ import defaultPackage.*;
  * @author a
  */
 public class BooksFrame extends javax.swing.JPanel {
-
+    private Libro[] libroBusqueda;
     private Libro[] libros;
     /**
      * Creates new form Principal
@@ -67,7 +67,7 @@ public class BooksFrame extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
 
         bid.setForeground(new java.awt.Color(102, 102, 102));
-        bid.setText("Ingrese el ID del Libro a buscar");
+        bid.setText("Ingrese el nombre del libro a buscar");
         bid.setBorder(null);
         bid.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -221,7 +221,7 @@ public class BooksFrame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bidMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMousePressed
-       if(bid.getText().equals("Ingrese el ID del Libro a buscar"))
+       if(bid.getText().equals("Ingrese el nombre del libro a buscar"))
         bid.setText("");
     }//GEN-LAST:event_bidMousePressed
 
@@ -275,7 +275,7 @@ public class BooksFrame extends javax.swing.JPanel {
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         if(bid.getText().equals("") || bid.getText() == null || bid.getText().equals(" "))
-            bid.setText("Ingrese el ID del Libro a buscar");
+            bid.setText("Ingrese el nombre del libro a buscar");
     }//GEN-LAST:event_jTable1MousePressed
     // BORRAR
     private void deleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMousePressed
@@ -288,11 +288,12 @@ public class BooksFrame extends javax.swing.JPanel {
     }//GEN-LAST:event_editMousePressed
     // BUSCAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
-       
+         String busqueda = bid.getText();
+         buscarLibros(busqueda);
     }//GEN-LAST:event_buttonMousePressed
 
     private void bidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMouseClicked
-        if(bid.getText().equals("Ingrese el nombre de editorial"))
+        if(bid.getText().equals("Ingrese el nombre del libro a buscar"))
         bid.setText("");
     }//GEN-LAST:event_bidMouseClicked
 
@@ -300,6 +301,23 @@ public class BooksFrame extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nuevo2MouseClicked
     
+    private void buscarLibros(String busqueda) {
+        libroBusqueda = null;
+        try (Connection connection = App.getConnection()) {
+           LibroDao libroDao = App.getLibroDao(connection);
+           libros = libroDao.getByName(busqueda);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial1");
+        }
+        try{
+            cargarTblLibrosBusqueda();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLEditoriales2");
+        }
+        
+    }
     private void consultarLibros() {
         libros = null;
         try (Connection connection = App.getConnection()) {
@@ -316,6 +334,21 @@ public class BooksFrame extends javax.swing.JPanel {
             System.out.println("Problema cargarTBLibros");
         }
     }
+    private void cargarTblLibrosBusqueda() {
+        
+        DefaultTableModel tblModel = (
+                DefaultTableModel)jTable1.getModel();
+        
+        while (tblModel.getRowCount() != 0) tblModel.removeRow(0);
+        
+        if (libroBusqueda == null) return;
+        
+        for (int i = 0; i < libroBusqueda.length; i++) {
+            tblModel.insertRow(i, toRow(libroBusqueda[i]));
+        }
+        
+    }
+    
     private void cargarTblLibros() {
         
         DefaultTableModel tblModel = (

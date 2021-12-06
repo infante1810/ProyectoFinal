@@ -9,6 +9,7 @@ public interface EditorialDao {
     Editorial getById(int editorialId) throws Exception;
     
     Editorial[] getAll() throws Exception;
+    Editorial[] getByName(String editorialName) throws Exception;
     
     String[] getComboData() throws Exception;
     

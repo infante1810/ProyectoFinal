@@ -30,4 +30,6 @@ public interface LibroDao {
      * @throws Exception 
      */
     void update(Libro i) throws Exception;    
+    
+    Libro[] getByName(String libroName) throws Exception;
 }

@@ -6,8 +6,26 @@
             <file>file:/C:/Users/infan/Documents/Camtasia/Programacion%20Orientada%20a%20Objetos/ProyectoFinal/src/defaultPackage/App.java</file>
         </group>
         <group>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/Libro.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/UpBooks.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/TipoRecurso.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/LibroInventarioExistenciaVDbDao.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/Lendings.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/TipoRecursoDao.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/TipoRecursoDbDao.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/ComboBoxCustom/ComboBoxSugestion.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/LibroDbDao.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/LibroInventarioExistenciaVDao.java</file>
             <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/Dashboard.java</file>
             <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/EditorialFrame.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/EditorialDbDao.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/EditorialDao.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/LibroInventarioVDbDao.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/Users.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/UpEditorial.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/LibroInventarioExistenciaV.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/ComboBoxCustom/ComboBoxCustom.java</file>
+            <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/dataaccess/Editorial.java</file>
             <file>file:/C:/Users/nahum/Documents/GitHub/ProyectoFinaLuiz/ProyectoFinal/src/UI/BooksFrame.java</file>
         </group>
     </open-files>

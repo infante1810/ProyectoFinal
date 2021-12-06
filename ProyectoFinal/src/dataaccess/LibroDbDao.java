@@ -43,6 +43,29 @@ public class LibroDbDao implements LibroDao {
         }
         return i;
     }
+    
+     public Libro[] getByName(String libroName) throws Exception {
+        //Implementacion de metodo getById
+        ArrayList<Libro> libro = new ArrayList<>();
+        
+         String sql = "SELECT * FROM Libros ORDER BY titulo";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+             try (ResultSet r = stmt.executeQuery()) {
+                System.out.println("executenms");
+                while (r.next()){
+              
+                    if(r.getString("titulo").equals(libroName)){
+                        libro.add(toObj(r));
+                        System.out.println("executing succesfull-concidencia");
+                    }
+                    
+                };
+                System.out.println("executing succesfullsi");
+            }
+        }
+        return libro.toArray(new Libro[]{});
+    }
+    
 
     //TOFIX problem here to insert
     @Override

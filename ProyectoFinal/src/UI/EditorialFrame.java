@@ -16,6 +16,7 @@ import defaultPackage.*;
  */
 public class EditorialFrame extends javax.swing.JPanel {
     private Editorial[] editoriales;
+    private Editorial[] editorialesBusqueda;
     
     /**
      * Creates new form Principal
@@ -225,11 +226,12 @@ public class EditorialFrame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bidMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMousePressed
-       if(bid.getText().equals("Ingrese el ID del Libro a buscar"))
+       if(bid.getText().equals("Ingrese el nombre de editorial"))
         bid.setText("");
     }//GEN-LAST:event_bidMousePressed
+   
     private void bidMouseClicked(java.awt.event.MouseEvent evt) {                                 
-       if(bid.getText().equals("Ingrese el ID del Libro a buscar"))
+       if(bid.getText().equals("Ingrese el nombre de editorial"))
         bid.setText("");
     }                                
     
@@ -297,7 +299,9 @@ public class EditorialFrame extends javax.swing.JPanel {
     }//GEN-LAST:event_editMousePressed
     // BUSCAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
-       
+         String busqueda = bid.getText();
+         buscarrEditoriales(busqueda);
+         
     }//GEN-LAST:event_buttonMousePressed
 
     private void nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMouseClicked
@@ -309,6 +313,24 @@ public class EditorialFrame extends javax.swing.JPanel {
     }
     void resetColor(JPanel panel){
         panel.setBackground(new Color(16,152,173));
+    }
+     private void buscarrEditoriales(String busqueda) {
+        editorialesBusqueda = null;
+        try (Connection connection = App.getConnection()) {
+            EditorialDao editorialDao = App.getEditoriaDao(connection);
+//We get a connection stable here
+            editorialesBusqueda = editorialDao.getByName(busqueda);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial1");
+        }
+        try{
+            cargarTblEditorialesBusqueda();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLEditoriales2");
+        }
+        
     }
     private void consultarEditoriales() {
         editoriales = null;
@@ -325,6 +347,20 @@ public class EditorialFrame extends javax.swing.JPanel {
         }
         catch (Exception e){
             System.out.println("Problema cargarTBLEditoriales");
+        }
+        
+    }
+    private void cargarTblEditorialesBusqueda() {
+        
+        DefaultTableModel tblModel = (
+                DefaultTableModel)jTable1.getModel();
+        
+        while (tblModel.getRowCount() != 0) tblModel.removeRow(0);
+        
+        if (editorialesBusqueda == null) return;
+        
+        for (int i = 0; i < editorialesBusqueda.length; i++) {
+            tblModel.insertRow(i, toRow(editorialesBusqueda[i]));
         }
         
     }

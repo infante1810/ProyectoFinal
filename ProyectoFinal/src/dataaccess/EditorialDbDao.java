@@ -36,6 +36,28 @@ public class EditorialDbDao implements EditorialDao{
         return editorial;
     }
     
+     public Editorial[] getByName(String editorialName) throws Exception {
+        //Implementacion de metodo getById
+        ArrayList<Editorial> editorial = new ArrayList<>();
+        
+         String sql = "SELECT * FROM editoriales WHERE activo = 1 ORDER BY nombre";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+             try (ResultSet r = stmt.executeQuery()) {
+                System.out.println("executenms");
+                while (r.next()){
+              
+                    if(r.getString("nombre").equals(editorialName)){
+                        editorial.add(toObj(r));
+                        System.out.println("executing succesfull");
+                    }
+                    
+                };
+                System.out.println("executing succesfullsi");
+            }
+        }
+        return editorial.toArray(new Editorial[]{});
+    }
+    
     @Override
     public Editorial[] getAll() throws Exception {
         //Implementacion de metodo getall

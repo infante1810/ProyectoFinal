@@ -23,8 +23,10 @@ import javax.swing.table.DefaultTableModel;
 public class UpEditorial extends javax.swing.JPanel {
 
   
-    boolean edit;
+    boolean edit=false;
     String idus;
+    
+    
     /**
      * Creates new form Principal
      */
@@ -34,16 +36,17 @@ public class UpEditorial extends javax.swing.JPanel {
         edit = false;
     }
     
-    public UpEditorial(String usid,String editorialId, String names, String countries, String emails, String states, String ustel) {
+    public UpEditorial(int usid, String names, String countries, String emails) {
         initComponents();
-        idus = usid;
-      
+       
+        jLabel2.setText(usid+"");
         name.setText(names);
         country.setText(countries);
         email.setText(emails);
         
         edit = true;
         jLabel1.setText("Guardar");
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +71,7 @@ public class UpEditorial extends javax.swing.JPanel {
         email = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         Text6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 430));
@@ -181,6 +185,9 @@ public class UpEditorial extends javax.swing.JPanel {
         Text6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text6.setText("Nombre");
         add(Text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jLabel2.setText("jLabel2");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseEntered
@@ -239,20 +246,28 @@ public class UpEditorial extends javax.swing.JPanel {
     }//GEN-LAST:event_nameActionPerformed
     // REGISTRAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
+        
         String nameEditorial = name.getText();
         String emailEditorial = email.getText();
         String countryEditorial = country.getText();
         
         
         if(checkText(nameEditorial) == true && checkText(emailEditorial) && checkText(countryEditorial)){
+            if(edit == false){
+                subirEditoriales(nameEditorial, emailEditorial, countryEditorial);
+                
+            }else{
+                int idEditorial = Integer.valueOf(jLabel2.getText());
+                editarEditoriales(idEditorial,nameEditorial, emailEditorial, countryEditorial);
+            
+            }
         EditorialFrame p1 = new EditorialFrame();
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
-        subirEditoriales(nameEditorial, emailEditorial, countryEditorial);
         content.removeAll();
         content.add(p1, BorderLayout.CENTER);
         content.revalidate();
-        content.repaint();            
+        content.repaint();  
         }else{
              JOptionPane.showMessageDialog(new JFrame(), "No deje espacios vacios", "Error",
                 JOptionPane.ERROR_MESSAGE);
@@ -275,10 +290,35 @@ public class UpEditorial extends javax.swing.JPanel {
         
         
     }
-    private void subirEditoriales(String name, String email, String country) {
+    private void editarEditoriales(int id,String name, String email, String country) {
+        Editorial editorial = new Editorial();
+        editorial.setId(id);
+        editorial.setEmail(email);
+        editorial.setPais(country);
+        editorial.setNombre(name);
+        editorial.setActivo(true);
+        
+        try (Connection connection = App.getConnection()) {
+            EditorialDao editorialDao = App.getEditoriaDao(connection);
+//We get a connection stable here
+            editorialDao.update(editorial);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial");
+        }
+        try{
+            ;
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLEditoriales");
+        }
+        
+    }
+    
+     private void subirEditoriales(String name, String email, String country) {
         Editorial editorial = new Editorial();
         editorial.setEmail(email);
-        editorial.setPais(name);
+        editorial.setPais(country);
         editorial.setNombre(name);
         editorial.setActivo(true);
         
@@ -291,26 +331,15 @@ public class UpEditorial extends javax.swing.JPanel {
             System.out.println("Problema cargar Editorial");
         }
         try{
-            cargarTblEditoriales();
+            ;
         }
         catch (Exception e){
             System.out.println("Problema cargarTBLEditoriales");
         }
         
     }
-    private void cargarTblEditoriales() {
-        
-        
-        
-      
-     
-    }
     
-    private Object[] toRow(Editorial i) {
-        return new Object[] {
-            i.getNombre(), i.getPais(), i.getEmail()
-        };
-    }
+    
     
  
   
@@ -324,6 +353,7 @@ public class UpEditorial extends javax.swing.JPanel {
     private javax.swing.JTextField country;
     private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;

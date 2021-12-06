@@ -344,7 +344,6 @@ public class BooksFrame extends javax.swing.JPanel {
         if (libroBusqueda == null) return;
         
         for (int i = 0; i < libroBusqueda.length; i++) {
-             
             tblModel.insertRow(i, toRow(libroBusqueda[i]));
         }
         

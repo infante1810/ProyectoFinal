@@ -10,7 +10,7 @@ public interface EditorialDao {
     
     Editorial[] getAll() throws Exception;
     Editorial[] getByName(String editorialName) throws Exception;
-    
+    void Delete(int i) throws Exception;
     String[] getComboData() throws Exception;
     
     int insert(Editorial i) throws Exception;

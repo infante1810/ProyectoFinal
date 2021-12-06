@@ -57,6 +57,8 @@ public class EditorialDbDao implements EditorialDao{
         }
         return editorial.toArray(new Editorial[]{});
     }
+     
+    
     
     @Override
     public Editorial[] getAll() throws Exception {
@@ -116,6 +118,33 @@ public class EditorialDbDao implements EditorialDao{
             //si jala ignora esto :v
         }
         return i.getId();
+    }
+    
+
+    @Override
+    public void Delete(int i) throws Exception {
+        //Implementacion de insert
+        
+        // Cuando ejecutamos un stored procedure, definimos la cantidad de 
+        // parámetros con '?'. Nota: ver definición del stored procedure en
+        // la base de datos.
+        String sql = "CALL delete_editorial(?)";
+        
+        // Usamos el objeto CallableStatement
+        try (CallableStatement stmt = connection.prepareCall(sql)) {
+            
+            // Agregamos los parámetros del stored procedure en orden.
+            stmt.setInt(1, i);
+            stmt.execute();
+           
+            System.out.println("delete");
+            // El stored procedure regresa una consulta (instrucción SELECT),
+            // por lo que obtenemos el resultset para obtener le resultado,
+            // para este caso es el id del registro insertado.
+        }catch(Exception e){
+            //si jala ignora esto :v
+        }
+        
     }
     
     @Override

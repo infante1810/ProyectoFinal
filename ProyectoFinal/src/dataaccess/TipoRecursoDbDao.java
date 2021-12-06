@@ -29,7 +29,7 @@ public class TipoRecursoDbDao implements TipoRecursoDao{
     public TipoRecurso[] getAll() throws Exception {
         //Implementacion de metodo getall
         ArrayList<TipoRecurso> l = new ArrayList<>();
-        String sql = "SELECT * FROM tipo_recurso WHERE Activo = 1 ORDER BY nombre";
+        String sql = "SELECT * FROM tipos_recursos WHERE Activo = 1 ORDER BY nombre";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             try (ResultSet r = stmt.executeQuery()) {
                 while (r.next()) l.add(new TipoRecurso(r));
@@ -40,7 +40,7 @@ public class TipoRecursoDbDao implements TipoRecursoDao{
     public String[] getComboData() throws Exception {
         //Implementacion de metodo getall
         ArrayList<String> l = new ArrayList<>();
-        String sql = "SELECT nombre FROM tipo_recurso WHERE activo = 1 ORDER BY nombre";
+        String sql = "SELECT nombre FROM tipos_recursos WHERE activo = 1 ORDER BY nombre";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             System.out.println("preparestatement");
             try (ResultSet r = stmt.executeQuery()) {

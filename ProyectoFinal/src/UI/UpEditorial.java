@@ -239,7 +239,7 @@ public class UpEditorial extends javax.swing.JPanel {
     }//GEN-LAST:event_nameActionPerformed
     // REGISTRAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
-         String nameEditorial = name.getText();
+        String nameEditorial = name.getText();
         String emailEditorial = email.getText();
         String countryEditorial = country.getText();
         

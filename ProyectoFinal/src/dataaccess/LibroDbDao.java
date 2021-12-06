@@ -50,9 +50,8 @@ public class LibroDbDao implements LibroDao {
         String sql = "CALL insert_libro(?, ?, ?, ?, ?, ?, ?)";
         try (CallableStatement stmt = connection.prepareCall(sql)) {
             stmt.setString(1, i.getTitulo());
-            stmt.setInt(2, i.getTipoRecursoId());
-            stmt.setString(3, i.getEdicion());
-            stmt.setInt(4, i.getEditorialId());  // NOTA: Se maneja así porque es un int que puede ser null.
+            stmt.setString(2, i.getTipoRecurso());
+            stmt.setString(4, i.getEditorial());  // NOTA: Se maneja así porque es un int que puede ser null.
             stmt.setString(5, i.getAutores());
             stmt.setString(6, i.getIsbn());
             stmt.setBoolean(7, i.isActivo());
@@ -70,14 +69,12 @@ public class LibroDbDao implements LibroDao {
     public void update(Libro i) throws Exception {
         String sql = "CALL update_libro(?, ?, ?, ?, ?, ?, ?, ?)";
         try (CallableStatement stmt = connection.prepareCall(sql)) {
-            stmt.setInt(1, i.getId());
-            stmt.setString(2, i.getTitulo());
-            stmt.setInt(3, i.getTipoRecursoId());
-            stmt.setString(4, i.getEdicion());
-            stmt.setObject(5, i.getEditorialId());  // NOTA: Se maneja así porque es un int que puede ser null.
-            stmt.setString(6, i.getAutores());
-            stmt.setString(7, i.getIsbn());
-            stmt.setBoolean(8, i.isActivo());
+            stmt.setString(1, i.getTitulo());
+            stmt.setString(2, i.getTipoRecurso());
+            stmt.setString(4, i.getEditorial());  // NOTA: Se maneja así porque es un int que puede ser null.
+            stmt.setString(5, i.getAutores());
+            stmt.setString(6, i.getIsbn());
+            stmt.setBoolean(7, i.isActivo());
             stmt.execute();
         }
     }
@@ -86,9 +83,8 @@ public class LibroDbDao implements LibroDao {
         Libro i = new Libro();
         i.setId(r.getInt("id"));
         i.setTitulo(r.getString("titulo"));
-        i.setTipoRecursoId(r.getInt("tipo_recurso_id"));
-        i.setEdicion(r.getString("edicion"));
-        i.setEditorialId((Integer)r.getObject("editorial_id")); // NOTA: Se maneja así porque es un int que puede ser null.
+        i.setTipoRecurso(r.getString("tipo_recurso_id"));
+        i.setEditorial(r.getString("editorial_id")); // NOTA: Se maneja así porque es un int que puede ser null.
         i.setAutores(r.getString("autores"));
         i.setIsbn(r.getString("isbn"));
         i.setActivo(r.getBoolean("activo"));

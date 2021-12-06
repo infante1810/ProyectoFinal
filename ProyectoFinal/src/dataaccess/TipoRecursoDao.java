@@ -9,5 +9,6 @@ public interface TipoRecursoDao {
     TipoRecurso[] getAll() throws Exception;   
     
     String[] getComboData() throws Exception;
+    
 }
 

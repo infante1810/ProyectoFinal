@@ -10,9 +10,8 @@ public class Libro {
     
     private int id;
     private String titulo;
-    private int tipoRecursoId;
-    private String edicion;
-    private Integer editorialId;
+    private String tipoRecurso;
+    private String editorial;
     private String autores;
     private String isbn;
     private boolean activo;
@@ -33,28 +32,22 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public int getTipoRecursoId() {
-        return tipoRecursoId;
+    public String getTipoRecurso() {
+        return tipoRecurso;
     }
 
-    public void setTipoRecursoId(int tipoRecursoId) {
-        this.tipoRecursoId = tipoRecursoId;
+    public void setTipoRecurso(String tipoRecurso) {
+        this.tipoRecurso = tipoRecurso;
     }
 
-    public String getEdicion() {
-        return edicion;
+   
+
+    public String getEditorial() {
+        return editorial;
     }
 
-    public void setEdicion(String edicion) {
-        this.edicion = edicion;
-    }
-
-    public Integer getEditorialId() {
-        return editorialId;
-    }
-
-    public void setEditorialId(Integer editorialId) {
-        this.editorialId = editorialId;
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
     }
 
     public String getAutores() {

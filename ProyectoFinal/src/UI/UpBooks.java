@@ -8,8 +8,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import ComboBoxCustom.ComboBoxSugestion;
 import static UI.Dashboard.content;
-import dataaccess.Editorial;
-import dataaccess.EditorialDao;
+import dataaccess.*;
 import defaultPackage.App;
 import java.awt.BorderLayout;
 import java.sql.Connection;
@@ -21,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class UpBooks extends javax.swing.JPanel {
 
     private String[] editoriales;
+    private String[] tipo;
     boolean edition;
     String origId;
     /**
@@ -29,6 +29,7 @@ public class UpBooks extends javax.swing.JPanel {
     public UpBooks() {
         initComponents();
         CboxEditorial.addItem("Sin editorial");
+        consultarTipos();
         consultarEditoriales();
         edition = false;
     }
@@ -415,6 +416,35 @@ public class UpBooks extends javax.swing.JPanel {
         }
         catch (Exception e){
             System.out.println("Problema cargarTBLEditoriales");
+        }
+        
+    }
+     
+     private void consultarTipos() {
+        tipo = null;
+        try (Connection connection = App.getConnection()) {
+            TipoRecursoDao tipoRecursoDao = App.getTipoRecursoDao(connection);
+//We get a connection stable here
+            tipo = tipoRecursoDao.getComboData();
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Tipos1");
+        }
+        try{
+            cargarTblEditorialesTipo();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargar tipos2");
+        }
+        
+    }
+    private void cargarTblEditorialesTipo() {
+        
+        if (tipo == null) return;
+        
+        for (int i = 0; i < tipo.length; i++) {
+         
+            CboxRecurso.addItem(tipo[i]);
         }
         
     }

@@ -11,10 +11,7 @@ public class TipoRecurso {
     private int id;
     private String nombre;
     private boolean activo;
-
-    TipoRecurso(ResultSet r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     public int getId() {
         return id;

@@ -134,6 +134,7 @@ CREATE TABLE `libros` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titulo` varchar(512) NOT NULL,
   `tipo_recurso_id` int NOT NULL,
+  `stock` int NOT NULL,
   `edicion` varchar(128) DEFAULT NULL,
   `editorial_id` int DEFAULT NULL,
   `autores` varchar(1024) DEFAULT NULL,
@@ -153,7 +154,7 @@ CREATE TABLE `libros` (
 
 LOCK TABLES `libros` WRITE;
 /*!40000 ALTER TABLE `libros` DISABLE KEYS */;
-INSERT INTO `libros` VALUES (5,'ciencias naturales',1,'4ta Edicion',1,'Benito Juarez','12345',_binary ''),(6,'Historia I',1,'5ta Edicion',1,'Lalo Sierra','54321',_binary ''),(7,'Matematicas',1,'1ra Edicion',1,'Guillermo Sierra','6789',_binary '');
+INSERT INTO `libros` VALUES (5,'ciencias naturales',1,2,'4ta Edicion',1,'Benito Juarez','12345',_binary ''),(6,'Historia I',1,2,'5ta Edicion',1,'Lalo Sierra','54321',_binary ''),(7,'Matematicas',1,2,'1ra Edicion',1,'Guillermo Sierra','6789',_binary '');
 /*!40000 ALTER TABLE `libros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,6 +348,11 @@ CREATE TABLE `tipos_recursos` (
 LOCK TABLES `tipos_recursos` WRITE;
 /*!40000 ALTER TABLE `tipos_recursos` DISABLE KEYS */;
 INSERT INTO `tipos_recursos` VALUES (1,'libro',_binary '');
+INSERT INTO `tipos_recursos` VALUES (2,'revista',_binary '');
+INSERT INTO `tipos_recursos` VALUES (3,'articulo web',_binary '');
+INSERT INTO `tipos_recursos` VALUES (4,'enciclopedia',_binary '');
+INSERT INTO `tipos_recursos` VALUES (5,'tesis',_binary '');
+INSERT INTO `tipos_recursos` VALUES (6,'reporte',_binary '');
 /*!40000 ALTER TABLE `tipos_recursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,6 +430,54 @@ DELIMITER ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
+
+-- -----------------------------------------------------
+-- procedure insert_editorial
+-- -----------------------------------------------------
+DELIMITER ;
+
+USE `biblioteca`;
+DROP procedure IF EXISTS `insert_editorial`;
+
+DELIMITER $$
+USE `biblioteca`$$
+CREATE PROCEDURE `insert_editorial`(
+	 IN p_nombre  varchar(256)
+    ,IN p_pais varchar(45)
+    ,IN p_email varchar(45)
+    ,IN p_activo int
+)
+BEGIN
+	INSERT INTO editoriales(nombre, pais, email,activo) 
+		VALUES(p_nombre, p_pais, p_email, p_activo);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure insert_libro
+-- -----------------------------------------------------
+DELIMITER ;
+
+USE `biblioteca`;
+DROP procedure IF EXISTS `insert_libro`;
+
+DELIMITER $$
+USE `biblioteca`$$
+CREATE PROCEDURE `insert_libro` (
+	 IN p_titulo varchar(512)
+	,IN p_tipo_recurso_id int
+	,IN p_stock int
+    ,IN p_editorial_id int
+    ,IN p_autores varchar(1024)
+    ,IN p_isbn varchar(256)
+    ,IN p_activo bit(1))
+BEGIN
+	INSERT INTO libros(titulo,tipo_recurso_id,stock,editorial_id,autores,isbn,activo) 
+		VALUES(p_titulo,p_tipo_recurso_id,p_stock,p_editorial_id,p_autores,p_isbn,p_activo);
+END$$
+
+DELIMITER ;
 --
 -- Final view structure for view `alumnos_v`
 --

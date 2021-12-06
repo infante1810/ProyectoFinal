@@ -11,10 +11,19 @@ public class Libro {
     private int id;
     private String titulo;
     private String tipoRecurso;
+    private int stock;
     private String editorial;
     private String autores;
     private String isbn;
     private boolean activo;
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
       
     public int getId() {
         return id;

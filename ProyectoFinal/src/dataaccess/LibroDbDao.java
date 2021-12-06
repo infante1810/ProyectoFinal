@@ -73,8 +73,9 @@ public class LibroDbDao implements LibroDao {
         String sql = "CALL insert_libro(?, ?, ?, ?, ?, ?, ?)";
         try (CallableStatement stmt = connection.prepareCall(sql)) {
             stmt.setString(1, i.getTitulo());
-            stmt.setString(2, i.getTipoRecurso());
-            stmt.setString(4, i.getEditorial());  // NOTA: Se maneja así porque es un int que puede ser null.
+            stmt.setInt(2, Integer.parseInt(i.getTipoRecurso()));
+            stmt.setInt(3, i.getStock());
+            stmt.setInt(4, Integer.parseInt(i.getEditorial()));  // NOTA: Se maneja así porque es un int que puede ser null.
             stmt.setString(5, i.getAutores());
             stmt.setString(6, i.getIsbn());
             stmt.setBoolean(7, i.isActivo());
@@ -83,7 +84,6 @@ public class LibroDbDao implements LibroDao {
                 i.setId(r.getInt("id"));
             }
         }catch(Exception e){
-            System.out.println("Problems hereee");
         }
         return i.getId();
     }

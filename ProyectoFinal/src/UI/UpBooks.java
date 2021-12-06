@@ -12,6 +12,8 @@ import dataaccess.*;
 import defaultPackage.App;
 import java.awt.BorderLayout;
 import java.sql.Connection;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -20,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class UpBooks extends javax.swing.JPanel {
 
     private String[] editoriales;
-    private String[] tipo;
+    private TipoRecurso[] tipo;
     boolean edition;
     String origId;
     /**
@@ -356,16 +358,64 @@ public class UpBooks extends javax.swing.JPanel {
 
     // SUBIR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
+        String titulo = title.getText();
+        String autores = authors.getText();
+        String isbn = this.isbn.getText();
+        int tipo = returnSelectedTipo();
+        int stock = Integer.parseInt(this.stock.getText());
+        int editorial = returnSelectedEditorial();
+        boolean activo = ((this.state.getText()).equals("1") || ((this.state.getText()).toUpperCase()).equals("ACTIVO"));
+        
+        if(checkText(titulo) == true && checkText(autores) && checkText(isbn) && checkText(this.stock.getText()) && checkText((state.getText()))){
         BooksFrame p1 = new BooksFrame();
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
-
+        subirLibros(titulo, tipo, stock, editorial, autores, isbn, activo);
         content.removeAll();
         content.add(p1, BorderLayout.CENTER);
         content.revalidate();
-        content.repaint();
+        content.repaint();            
+        }else{
+             JOptionPane.showMessageDialog(new JFrame(), "No deje espacios vacios", "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+
+        
     }//GEN-LAST:event_buttonMousePressed
 
+    private void subirLibros(String titulo, int tipoRecurso, int stock,int editorial,String autores, String isbnText, boolean activo) {
+       
+        Libro libro = new Libro();
+        libro.setTitulo(titulo);
+        libro.setTipoRecurso(String.valueOf(tipoRecurso));
+        libro.setStock(stock);
+        libro.setEditorial(String.valueOf(editorial));
+        libro.setAutores(autores);
+        libro.setIsbn(isbnText);
+        //libro.s
+        libro.setActivo(true);
+        
+        try (Connection connection = App.getConnection()) {
+            LibroDao libroDao = App.getLibroDao(connection);
+//We get a connection stable here
+            libroDao.insert(libro);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Libro");
+        }
+        
+    }
+    
+    private boolean checkText(String text){
+        if(text.equals("")){
+            return false;
+        }else{
+            return true;
+        }
+    }    
+    
     private void stateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stateMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_stateMousePressed
@@ -425,7 +475,7 @@ public class UpBooks extends javax.swing.JPanel {
         try (Connection connection = App.getConnection()) {
             TipoRecursoDao tipoRecursoDao = App.getTipoRecursoDao(connection);
 //We get a connection stable here
-            tipo = tipoRecursoDao.getComboData();
+            tipo = tipoRecursoDao.getAll();
         } 
         catch (Exception ex) {
             System.out.println("Problema cargar Tipos1");
@@ -444,7 +494,7 @@ public class UpBooks extends javax.swing.JPanel {
         
         for (int i = 0; i < tipo.length; i++) {
          
-            CboxRecurso.addItem(tipo[i]);
+            CboxRecurso.addItem(tipo[i].getNombre());            
         }
         
     }
@@ -490,4 +540,36 @@ public class UpBooks extends javax.swing.JPanel {
     private javax.swing.JTextField stock;
     private javax.swing.JTextField title;
     // End of variables declaration//GEN-END:variables
+
+    private int returnSelectedTipo() {
+        String recurso =CboxRecurso.getSelectedItem().toString();
+        int recursoObtenido=0;
+        try (Connection connection = App.getConnection()) {
+           TipoRecursoDao tipoRecursoDao = App.getTipoRecursoDao(connection);
+           recursoObtenido = tipoRecursoDao.getRecurso(recurso);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema obtener idRecurso");
+        }
+        
+            return recursoObtenido;
+        
+                
+    }
+    
+    private int returnSelectedEditorial() {
+        String editorialName =CboxEditorial.getSelectedItem().toString();
+        int idEditorialObtenido=0;
+        try (Connection connection = App.getConnection()) {
+           EditorialDao editorialDao = App.getEditoriaDao(connection);
+           idEditorialObtenido = editorialDao.getIdEditorial(editorialName);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema obtener idRecurso");
+        }
+        
+            return idEditorialObtenido;
+        
+                
+    }
 }

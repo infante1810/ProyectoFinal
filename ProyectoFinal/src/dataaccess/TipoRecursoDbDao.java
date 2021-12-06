@@ -32,24 +32,41 @@ public class TipoRecursoDbDao implements TipoRecursoDao{
         String sql = "SELECT * FROM tipos_recursos WHERE Activo = 1 ORDER BY nombre";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             try (ResultSet r = stmt.executeQuery()) {
-                while (r.next()) l.add(new TipoRecurso(r));
+                while (r.next()) l.add(toObj(r));
             }
         }
         return l.toArray(new TipoRecurso[] {});
     }
-    public String[] getComboData() throws Exception {
+    
+    public int getRecurso(String nombreRecurso) throws Exception {
         //Implementacion de metodo getall
-        ArrayList<String> l = new ArrayList<>();
-        String sql = "SELECT nombre FROM tipos_recursos WHERE activo = 1 ORDER BY nombre";
+        int recurso;
+        ArrayList<TipoRecurso> tipoRecurso = new ArrayList<>();
+        
+         String sql = "SELECT * FROM tipos_recursos ORDER BY nombre";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            System.out.println("preparestatement");
-            try (ResultSet r = stmt.executeQuery()) {
-                System.out.println("execute");
-                while (r.next()) l.add(r.getString("nombre"));
-                System.out.println("executing succesfull");
+             try (ResultSet r = stmt.executeQuery()) {
+                System.out.println("executenms");
+                while (r.next()){
+              
+                    if(r.getString("nombre").equals(nombreRecurso)){
+                        tipoRecurso.add(toObj(r));
+                        System.out.println("executing succesfull-concidencia");
+                    }
+                    
+                };
+                System.out.println("executing succesfullsi");
             }
         }
-        return l.toArray(new String[] {});
+        TipoRecurso[] recursoObtenido =tipoRecurso.toArray(new TipoRecurso[]{});
+        recurso =recursoObtenido[0].getId();
+        return recurso;
     }
-    
+    private TipoRecurso toObj(ResultSet r) throws Exception {
+        TipoRecurso i = new TipoRecurso();
+        i.setId(r.getInt("id"));
+        i.setNombre(r.getString("nombre"));        
+        i.setActivo(true);           
+        return i;
+    }   
 }

@@ -8,7 +8,7 @@ public interface TipoRecursoDao {
     
     TipoRecurso[] getAll() throws Exception;   
     
-    String[] getComboData() throws Exception;
+    int getRecurso(String nombreRecurso) throws Exception;
     
 }
 

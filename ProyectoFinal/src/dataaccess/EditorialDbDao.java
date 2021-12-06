@@ -57,6 +57,17 @@ public class EditorialDbDao implements EditorialDao{
         }
         return editorial.toArray(new Editorial[]{});
     }
+     
+     public int getIdEditorial(String nombreEditorial) throws Exception {
+        //Implementacion de metodo getall
+        int idObtener;
+        Editorial[] editorialcita =getByName(nombreEditorial);
+        idObtener =editorialcita[0].getId();
+        
+        
+        return idObtener;
+    }
+     
     
     @Override
     public Editorial[] getAll() throws Exception {

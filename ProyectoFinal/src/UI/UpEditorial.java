@@ -9,6 +9,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import static UI.Dashboard.content;
+import dataaccess.Editorial;
+import dataaccess.EditorialDao;
+import defaultPackage.App;
+import java.sql.Connection;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author a
@@ -232,26 +239,80 @@ public class UpEditorial extends javax.swing.JPanel {
     }//GEN-LAST:event_nameActionPerformed
     // REGISTRAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
+         String nameEditorial = name.getText();
+        String emailEditorial = email.getText();
+        String countryEditorial = country.getText();
         
+        
+        if(checkText(nameEditorial) == true && checkText(emailEditorial) && checkText(countryEditorial)){
         EditorialFrame p1 = new EditorialFrame();
         p1.setSize(750, 430);
         p1.setLocation(0, 0);
-
+        subirEditoriales(nameEditorial, emailEditorial, countryEditorial);
         content.removeAll();
         content.add(p1, BorderLayout.CENTER);
         content.revalidate();
-        content.repaint();
-                    
+        content.repaint();            
+        }else{
+             JOptionPane.showMessageDialog(new JFrame(), "No deje espacios vacios", "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        
           
     }//GEN-LAST:event_buttonMousePressed
-
-   void setColor(JPanel panel){
+    void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }
     void resetColor(JPanel panel){
         panel.setBackground(new Color(16,152,173));
     }
+    private boolean checkText(String text){
+        if(text.equals("")){
+            return false;
+        }else{
+            return true;
+        }
+        
+        
+    }
+    private void subirEditoriales(String name, String email, String country) {
+        Editorial editorial = new Editorial();
+        editorial.setEmail(email);
+        editorial.setPais(name);
+        editorial.setNombre(name);
+        editorial.setActivo(true);
+        
+        try (Connection connection = App.getConnection()) {
+            EditorialDao editorialDao = App.getEditoriaDao(connection);
+//We get a connection stable here
+            editorialDao.insert(editorial);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial");
+        }
+        try{
+            cargarTblEditoriales();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLEditoriales");
+        }
+        
+    }
+    private void cargarTblEditoriales() {
+        
+        
+        
+      
+     
+    }
     
+    private Object[] toRow(Editorial i) {
+        return new Object[] {
+            i.getNombre(), i.getPais(), i.getEmail()
+        };
+    }
+    
+ 
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Text4;

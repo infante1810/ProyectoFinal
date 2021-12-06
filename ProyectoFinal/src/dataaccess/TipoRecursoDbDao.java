@@ -37,5 +37,19 @@ public class TipoRecursoDbDao implements TipoRecursoDao{
         }
         return l.toArray(new TipoRecurso[] {});
     }
+    public String[] getComboData() throws Exception {
+        //Implementacion de metodo getall
+        ArrayList<String> l = new ArrayList<>();
+        String sql = "SELECT nombre FROM tipo_recurso WHERE activo = 1 ORDER BY nombre";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            System.out.println("preparestatement");
+            try (ResultSet r = stmt.executeQuery()) {
+                System.out.println("execute");
+                while (r.next()) l.add(r.getString("nombre"));
+                System.out.println("executing succesfull");
+            }
+        }
+        return l.toArray(new String[] {});
+    }
     
 }

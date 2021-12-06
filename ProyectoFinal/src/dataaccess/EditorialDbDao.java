@@ -51,7 +51,20 @@ public class EditorialDbDao implements EditorialDao{
         }
         return l.toArray(new Editorial[] {});
     }
-    
+    public String[] getComboData() throws Exception {
+        //Implementacion de metodo getall
+        ArrayList<String> l = new ArrayList<>();
+        String sql = "SELECT nombre FROM editoriales WHERE activo = 1 ORDER BY nombre";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            System.out.println("preparestatement");
+            try (ResultSet r = stmt.executeQuery()) {
+                System.out.println("execute");
+                while (r.next()) l.add(r.getString("nombre"));
+                System.out.println("executing succesfull");
+            }
+        }
+        return l.toArray(new String[] {});
+    }
     @Override
     public int insert(Editorial i) throws Exception {
         //Implementacion de insert

@@ -10,6 +10,8 @@ public interface EditorialDao {
     
     Editorial[] getAll() throws Exception;
     
+    String[] getComboData() throws Exception;
+    
     int insert(Editorial i) throws Exception;
     
     void update(Editorial i) throws Exception;

@@ -6,6 +6,8 @@ package dataaccess;
  */
 public interface TipoRecursoDao {
     
-    TipoRecurso[] getAll() throws Exception;    
+    TipoRecurso[] getAll() throws Exception;   
+    
+    String[] getComboData() throws Exception;
 }
 

@@ -8,14 +8,19 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import ComboBoxCustom.ComboBoxSugestion;
 import static UI.Dashboard.content;
+import dataaccess.Editorial;
+import dataaccess.EditorialDao;
+import defaultPackage.App;
 import java.awt.BorderLayout;
+import java.sql.Connection;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author a
  */
 public class UpBooks extends javax.swing.JPanel {
 
-   
+    private String[] editoriales;
     boolean edition;
     String origId;
     /**
@@ -23,14 +28,17 @@ public class UpBooks extends javax.swing.JPanel {
      */
     public UpBooks() {
         initComponents();
+        CboxEditorial.addItem("Sin editorial");
+        consultarEditoriales();
         edition = false;
     }
     
     public UpBooks(String bid, String btitle, String bdate, String bauthor, String bcategory, String bedit, String blang, String bpages, String bdesc, String bejem, String bstock, String bavai){
         initComponents();
-       
+        
         edition = true;
- 
+       
+        
         origId = bid;
        
         title.setText(btitle);
@@ -254,6 +262,11 @@ public class UpBooks extends javax.swing.JPanel {
 
         CboxRecurso.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         CboxRecurso.setName(""); // NOI18N
+        CboxRecurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CboxRecursoActionPerformed(evt);
+            }
+        });
         add(CboxRecurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 260, -1));
 
         CboxEditorial.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -377,12 +390,46 @@ public class UpBooks extends javax.swing.JPanel {
         
     }//GEN-LAST:event_buttonMouseClicked
 
+    private void CboxRecursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboxRecursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CboxRecursoActionPerformed
+    
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));
     }
     void resetColor(JPanel panel){
         panel.setBackground(new Color(16,152,173));
     }
+     private void consultarEditoriales() {
+        editoriales = null;
+        try (Connection connection = App.getConnection()) {
+            EditorialDao editorialDao = App.getEditoriaDao(connection);
+//We get a connection stable here
+            editoriales = editorialDao.getComboData();
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial");
+        }
+        try{
+            cargarTblEditoriales();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLEditoriales");
+        }
+        
+    }
+    private void cargarTblEditoriales() {
+        
+        if (editoriales == null) return;
+        
+        for (int i = 0; i < editoriales.length; i++) {
+         
+            CboxEditorial.addItem(editoriales[i]);
+        }
+        
+    }
+    
+   
     
    
     

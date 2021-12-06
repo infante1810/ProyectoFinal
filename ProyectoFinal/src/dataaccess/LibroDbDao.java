@@ -106,6 +106,7 @@ public class LibroDbDao implements LibroDao {
         Libro i = new Libro();
         i.setId(r.getInt("id"));
         i.setTitulo(r.getString("titulo"));
+        i.setStock(r.getInt("stock"));
         i.setTipoRecurso(r.getString("tipo_recurso_id"));
         i.setEditorial(r.getString("editorial_id")); // NOTA: Se maneja así porque es un int que puede ser null.
         i.setAutores(r.getString("autores"));

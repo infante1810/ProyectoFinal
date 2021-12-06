@@ -366,7 +366,7 @@ public class BooksFrame extends javax.swing.JPanel {
     
     private Object[] toRow(Libro i) {
         return new Object[] {
-            i.getTitulo(),i.getTipoRecurso(),i.getEditorial(),i.getAutores(),i.getIsbn(),i.isActivo()
+            i.getTitulo(),i.getTipoRecurso(),i.getAutores(),i.getIsbn(),i.getStock()
         };
     }
     void setColor(JPanel panel){

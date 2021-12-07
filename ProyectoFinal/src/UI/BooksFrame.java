@@ -41,13 +41,13 @@ public class BooksFrame extends javax.swing.JPanel {
         bid = new javax.swing.JTextField();
         button = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        delete = new javax.swing.JPanel();
+        btnDelete = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        edit = new javax.swing.JPanel();
+        btnEdit = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        nuevo3 = new javax.swing.JPanel();
+        btnNuevo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -103,23 +103,23 @@ public class BooksFrame extends javax.swing.JPanel {
 
         add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 80, 30));
 
-        delete.setBackground(new java.awt.Color(16, 152, 173));
-        delete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnDelete.setBackground(new java.awt.Color(16, 152, 173));
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deleteMouseClicked(evt);
+                btnDeleteMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                deleteMouseEntered(evt);
+                btnDeleteMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                deleteMouseExited(evt);
+                btnDeleteMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                deleteMousePressed(evt);
+                btnDeleteMousePressed(evt);
             }
         });
-        delete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnDelete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,32 +130,32 @@ public class BooksFrame extends javax.swing.JPanel {
                 jLabel3MousePressed(evt);
             }
         });
-        delete.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
+        btnDelete.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
 
-        add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 395, 80, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 395, 80, -1));
 
-        edit.setBackground(new java.awt.Color(16, 152, 173));
-        edit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEdit.setBackground(new java.awt.Color(16, 152, 173));
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEdit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                editMouseEntered(evt);
+                btnEditMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                editMouseExited(evt);
+                btnEditMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                editMousePressed(evt);
+                btnEditMousePressed(evt);
             }
         });
-        edit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnEdit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Editar");
-        edit.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
+        btnEdit.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
 
-        add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 395, 80, -1));
+        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 395, 80, -1));
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -200,23 +200,23 @@ public class BooksFrame extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 900, 300));
 
-        nuevo3.setBackground(new java.awt.Color(16, 152, 173));
-        nuevo3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nuevo3.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnNuevo.setBackground(new java.awt.Color(16, 152, 173));
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nuevo3MouseClicked(evt);
+                btnNuevoMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                nuevo3MouseEntered(evt);
+                btnNuevoMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                nuevo3MouseExited(evt);
+                btnNuevoMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                nuevo3MousePressed(evt);
+                btnNuevoMousePressed(evt);
             }
         });
-        nuevo3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnNuevo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -227,9 +227,9 @@ public class BooksFrame extends javax.swing.JPanel {
                 jLabel5MousePressed(evt);
             }
         });
-        nuevo3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
+        btnNuevo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
 
-        add(nuevo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 395, 80, -1));
+        add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 395, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bidMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMousePressed
@@ -246,26 +246,18 @@ public class BooksFrame extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonMouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
-        // Abrir sección
-        UpBooks p1 = new UpBooks();
-        p1.setSize(750, 430);
-        p1.setLocation(0,0);
-
-        content.removeAll();
-        content.add(p1, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+       
     }//GEN-LAST:event_jLabel3MousePressed
 
-    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
+    private void btnDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteMouseEntered
+    }//GEN-LAST:event_btnDeleteMouseEntered
 
-    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
+    private void btnDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteMouseExited
+    }//GEN-LAST:event_btnDeleteMouseExited
 
-    private void deleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMousePressed
+    private void btnDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMousePressed
         DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
         if(jTable1.getSelectedRow() != -1){
             int idSeleccionado = (int) tblModel.getValueAt(jTable1.getSelectedRow(), 6);
@@ -283,15 +275,15 @@ public class BooksFrame extends javax.swing.JPanel {
         }
 
         consultarLibros();
-    }//GEN-LAST:event_deleteMousePressed
+    }//GEN-LAST:event_btnDeleteMousePressed
 
-    private void editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseEntered
+    private void btnEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_editMouseEntered
+    }//GEN-LAST:event_btnEditMouseEntered
 
-    private void editMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseExited
+    private void btnEditMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_editMouseExited
+    }//GEN-LAST:event_btnEditMouseExited
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         if(bid.getText().equals("") || bid.getText() == null || bid.getText().equals(" "))
@@ -299,7 +291,7 @@ public class BooksFrame extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MousePressed
 
     // EDITAR
-    private void editMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMousePressed
+    private void btnEditMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditMousePressed
        DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
         if(jTable1.getSelectedRow() != -1){
             
@@ -333,7 +325,7 @@ public class BooksFrame extends javax.swing.JPanel {
                     this, "Seleccione Un Archivo", "Archivo No Seleccionado",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_editMousePressed
+    }//GEN-LAST:event_btnEditMousePressed
     // BUSCAR
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
          String busqueda = bid.getText();
@@ -345,29 +337,36 @@ public class BooksFrame extends javax.swing.JPanel {
         bid.setText("");
     }//GEN-LAST:event_bidMouseClicked
 
-    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteMouseClicked
+    }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MousePressed
 
-    private void nuevo3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo3MouseClicked
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_nuevo3MouseClicked
+    }//GEN-LAST:event_btnNuevoMouseClicked
 
-    private void nuevo3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo3MouseEntered
+    private void btnNuevoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_nuevo3MouseEntered
+    }//GEN-LAST:event_btnNuevoMouseEntered
 
-    private void nuevo3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo3MouseExited
+    private void btnNuevoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_nuevo3MouseExited
+    }//GEN-LAST:event_btnNuevoMouseExited
 
-    private void nuevo3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevo3MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nuevo3MousePressed
+    private void btnNuevoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMousePressed
+         
+         UpBooks p1 = new UpBooks();
+         p1.setSize(750, 430);
+         p1.setLocation(0,0);
+         content.removeAll();
+         content.add(p1, BorderLayout.CENTER);
+         content.revalidate();
+         content.repaint();
+    }//GEN-LAST:event_btnNuevoMousePressed
 
    
     private void buscarLibros(String busqueda) {
@@ -451,9 +450,10 @@ public class BooksFrame extends javax.swing.JPanel {
     private javax.swing.JLabel Title;
     private javax.swing.JTextField bid;
     private javax.swing.JPanel body;
+    private javax.swing.JPanel btnDelete;
+    private javax.swing.JPanel btnEdit;
+    private javax.swing.JPanel btnNuevo;
     private javax.swing.JPanel button;
-    private javax.swing.JPanel delete;
-    private javax.swing.JPanel edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -461,6 +461,5 @@ public class BooksFrame extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JPanel nuevo3;
     // End of variables declaration//GEN-END:variables
 }

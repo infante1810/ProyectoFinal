@@ -526,11 +526,11 @@ DELIMITER ;
 DELIMITER ;
 
 USE `biblioteca`;
-DROP procedure IF EXISTS `update libro`;
+DROP procedure IF EXISTS `update_libro`;
 
 DELIMITER $$
 USE `biblioteca`$$
-CREATE PROCEDURE `update libro` (
+CREATE PROCEDURE `update_libro` (
 	IN p_titulo varchar(512)
 	,IN p_tipo_recurso_id int
 	,IN p_stock int

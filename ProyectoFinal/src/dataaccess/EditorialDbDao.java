@@ -87,7 +87,8 @@ public class EditorialDbDao implements EditorialDao{
             }
         }
         return l.toArray(new Editorial[] {});
-    }
+    }    
+    
     public String[] getComboData() throws Exception {
         //Implementacion de metodo getall
         ArrayList<String> l = new ArrayList<>();

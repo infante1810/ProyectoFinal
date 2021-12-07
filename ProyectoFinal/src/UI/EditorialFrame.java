@@ -162,6 +162,9 @@ public class EditorialFrame extends javax.swing.JPanel {
         delete.setBackground(new java.awt.Color(16, 152, 173));
         delete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 deleteMouseEntered(evt);
             }
@@ -350,6 +353,10 @@ public class EditorialFrame extends javax.swing.JPanel {
     private void nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_nuevoMouseClicked
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteMouseClicked
 
     void setColor(JPanel panel){
         panel.setBackground(new Color(21,170,191));

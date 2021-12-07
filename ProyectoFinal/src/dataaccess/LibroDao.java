@@ -22,6 +22,7 @@ public interface LibroDao {
      */
     int insert(Libro i) throws Exception;
     
+    void delete(int i) throws Exception;
     
     Libro[] getAll() throws Exception;
     /**

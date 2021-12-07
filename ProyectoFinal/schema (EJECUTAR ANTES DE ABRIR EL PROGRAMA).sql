@@ -455,6 +455,25 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure delete_libro
+-- -----------------------------------------------------
+
+DELIMITER ;
+USE `biblioteca`;
+DROP procedure IF EXISTS `delete_libro`;
+
+DELIMITER $$
+USE `biblioteca`$$
+CREATE  PROCEDURE `delete_libro`(
+	IN p_id int
+)
+BEGIN
+	DELETE FROM libros WHERE id = p_id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- procedure delete_editorial
 -- -----------------------------------------------------
 DELIMITER ;
@@ -472,6 +491,68 @@ END$$
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- procedure update_editorial
+-- -----------------------------------------------------
+DELIMITER ;
+USE `biblioteca`;
+DROP procedure IF EXISTS `update_editorial`;
+
+DELIMITER $$
+USE `biblioteca`$$
+CREATE PROCEDURE `update_editorial`(
+	 IN p_id int
+	,IN p_nombre  varchar(256)
+    ,IN p_pais varchar(45)
+    ,IN p_email varchar(45)
+    ,IN p_activo int
+)
+BEGIN
+	UPDATE editoriales SET 
+    nombre = p_nombre, 
+    pais = p_pais, 
+    email = p_email,
+    activo = p_activo
+   
+	WHERE id=p_id;
+    
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure update_libro
+-- -----------------------------------------------------
+DELIMITER ;
+
+USE `biblioteca`;
+DROP procedure IF EXISTS `update libro`;
+
+DELIMITER $$
+USE `biblioteca`$$
+CREATE PROCEDURE `update libro` (
+	IN p_titulo varchar(512)
+	,IN p_tipo_recurso_id int
+	,IN p_stock int
+    ,IN p_editorial_id int
+    ,IN p_autores varchar(1024)
+    ,IN p_isbn varchar(256)
+    ,IN p_activo bit(1),
+    IN p_id int)
+BEGIN
+   UPDATE libros SET 
+    titulo = p_titulo, 
+    tipo_recurso_id = p_tipo_recurso_id, 
+    stock = p_stock,
+    editorial_id = p_editorial_id,
+    autores = p_autores,
+    isbn= p_isbn,
+    activo = p_activo
+   
+	WHERE id=p_id;
+END$$
+
+DELIMITER ;
 -- -----------------------------------------------------
 -- procedure insert_libro
 -- -----------------------------------------------------

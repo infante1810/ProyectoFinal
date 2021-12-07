@@ -91,13 +91,15 @@ public class LibroDbDao implements LibroDao {
     @Override
     public void update(Libro i) throws Exception {
         String sql = "CALL update_libro(?, ?, ?, ?, ?, ?, ?, ?)";
-        try (CallableStatement stmt = connection.prepareCall(sql)) {
+        try (CallableStatement stmt = connection.prepareCall(sql)) {            
             stmt.setString(1, i.getTitulo());
-            stmt.setString(2, i.getTipoRecurso());
-            stmt.setString(4, i.getEditorial());  // NOTA: Se maneja así porque es un int que puede ser null.
+            stmt.setInt(2, Integer.parseInt(i.getTipoRecurso()));
+            stmt.setInt(3, i.getStock());
+            stmt.setInt(4, Integer.parseInt(i.getEditorial()));  // NOTA: Se maneja así porque es un int que puede ser null.
             stmt.setString(5, i.getAutores());
             stmt.setString(6, i.getIsbn());
             stmt.setBoolean(7, i.isActivo());
+            stmt.setInt(8, i.getId());
             stmt.execute();
         }
     }
@@ -113,5 +115,30 @@ public class LibroDbDao implements LibroDao {
         i.setIsbn(r.getString("isbn"));
         i.setActivo(r.getBoolean("activo"));
         return i;
+    }
+
+    @Override
+    public void delete(int i) throws Exception {
+        //Implementacion de insert
+        
+        // Cuando ejecutamos un stored procedure, definimos la cantidad de 
+        // parámetros con '?'. Nota: ver definición del stored procedure en
+        // la base de datos.
+        String sql = "CALL delete_libro(?)";
+        
+        // Usamos el objeto CallableStatement
+        try (CallableStatement stmt = connection.prepareCall(sql)) {
+            
+            // Agregamos los parámetros del stored procedure en orden.
+            stmt.setInt(1, i);
+            stmt.execute();
+           
+            System.out.println("delete");
+            // El stored procedure regresa una consulta (instrucción SELECT),
+            // por lo que obtenemos el resultset para obtener le resultado,
+            // para este caso es el id del registro insertado.
+        }catch(Exception e){
+            //si jala ignora esto :v
+        }
     }
 }

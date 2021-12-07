@@ -24,6 +24,7 @@ public class UpBooks extends javax.swing.JPanel {
     private String[] editoriales;
     private TipoRecurso[] tipo;
     boolean edition;
+    boolean edit=false;
     String origId;
     /**
      * Creates new form Principal
@@ -33,9 +34,37 @@ public class UpBooks extends javax.swing.JPanel {
         CboxEditorial.addItem("Sin editorial");
         consultarTipos();
         consultarEditoriales();
-        edition = false;
     }
     
+    public UpBooks(int idSeleccionado,String titulo,int tipo,int stock,int editorial,String autores,String isbn,boolean activo) {
+        initComponents();
+        consultarTipos();
+        consultarEditoriales();
+        jLabel2.setText(String.valueOf(idSeleccionado));
+        title.setText(titulo+"");
+        authors.setText(autores+"");
+        this.isbn.setText(isbn+"");
+        for (int i = 0; i < this.tipo.length; i++) {
+         
+            if(tipo == this.tipo[i].getId()){
+                //verificar tipo
+                CboxRecurso.setSelectedItem(tipo);
+            }
+        }
+        this.stock.setText(String.valueOf(stock));
+        if (activo){
+            this.state.setText("ACTIVO");
+        }else{
+            this.state.setText("NO ACTIVO");
+        }
+        CboxEditorial.setSelectedItem(buscarEditoriales(editorial));
+        
+        
+        edit = true;
+        jLabel1.setText("Guardar");
+        
+    }
+    /*
     public UpBooks(String bid, String btitle, String bdate, String bauthor, String bcategory, String bedit, String blang, String bpages, String bdesc, String bejem, String bstock, String bavai){
         initComponents();
         
@@ -51,7 +80,7 @@ public class UpBooks extends javax.swing.JPanel {
         
         stock.setText(bpages);  
         jLabel1.setText("Guardar");
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,6 +115,7 @@ public class UpBooks extends javax.swing.JPanel {
         jSeparator13 = new javax.swing.JSeparator();
         CboxRecurso = new ComboBoxCustom.ComboBoxSugestion();
         CboxEditorial = new ComboBoxCustom.ComboBoxSugestion();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -140,7 +170,6 @@ public class UpBooks extends javax.swing.JPanel {
         Text6.setText("Título");
         add(Text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
-        title.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         title.setForeground(new java.awt.Color(102, 102, 102));
         title.setText("Ingrese el Título");
         title.setBorder(null);
@@ -164,7 +193,6 @@ public class UpBooks extends javax.swing.JPanel {
         Text9.setText("Autores");
         add(Text9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
-        authors.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         authors.setForeground(new java.awt.Color(102, 102, 102));
         authors.setText("Ingrese nombre de autores");
         authors.setBorder(null);
@@ -184,7 +212,6 @@ public class UpBooks extends javax.swing.JPanel {
         jSeparator10.setPreferredSize(new java.awt.Dimension(200, 10));
         add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 260, 10));
 
-        isbn.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         isbn.setForeground(new java.awt.Color(102, 102, 102));
         isbn.setText("Ingrese el ISBN");
         isbn.setBorder(null);
@@ -216,7 +243,6 @@ public class UpBooks extends javax.swing.JPanel {
         Text11.setText("Stock");
         add(Text11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
-        stock.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         stock.setForeground(new java.awt.Color(102, 102, 102));
         stock.setText("Ingrese la cantidad de ejemplares");
         stock.setBorder(null);
@@ -240,7 +266,6 @@ public class UpBooks extends javax.swing.JPanel {
         Text12.setText("Estado");
         add(Text12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
-        state.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         state.setForeground(new java.awt.Color(102, 102, 102));
         state.setText("Ingrese el estado del libro");
         state.setBorder(null);
@@ -274,6 +299,11 @@ public class UpBooks extends javax.swing.JPanel {
 
         CboxEditorial.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         add(CboxEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 260, -1));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("jLabel2");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseEntered
@@ -367,7 +397,13 @@ public class UpBooks extends javax.swing.JPanel {
         boolean activo = ((this.state.getText()).equals("1") || ((this.state.getText()).toUpperCase()).equals("ACTIVO"));
         
         if(checkText(titulo) == true && checkText(autores) && checkText(isbn) && checkText(this.stock.getText()) && checkText((state.getText()))){
-            subirLibros(titulo, tipo, stock, editorial, autores, isbn, activo);
+            if(edit== false){
+                subirLibros(titulo, tipo, stock, editorial, autores, isbn, activo);
+            }else{
+                int id = Integer.parseInt(jLabel2.getText());
+                editarBooks(id,titulo, tipo, stock, editorial, autores, isbn, activo);
+            }
+            
             BooksFrame p1 = new BooksFrame();
             p1.setSize(750, 430);
             p1.setLocation(0, 0);            
@@ -508,6 +544,28 @@ public class UpBooks extends javax.swing.JPanel {
         }
         
     }
+    private void editarBooks(int id, String titulo, int tipoRecurso, int stock,int editorial,String autores, String isbnText, boolean activo) {
+       
+        Libro libro = new Libro();
+        libro.setId(id);
+        libro.setTitulo(titulo);
+        libro.setTipoRecurso(String.valueOf(tipoRecurso));
+        libro.setStock(stock);
+        libro.setEditorial(String.valueOf(editorial));
+        libro.setAutores(autores);
+        libro.setIsbn(isbnText);
+        //libro.s
+        libro.setActivo(true);
+        
+        try (Connection connection = App.getConnection()) {
+            LibroDao libroDao = App.getLibroDao(connection);
+//We get a connection stable here
+            libroDao.update(libro);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Libro");
+        }
+    }
     
    
     
@@ -530,6 +588,7 @@ public class UpBooks extends javax.swing.JPanel {
     private javax.swing.JPanel button;
     private javax.swing.JTextField isbn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
@@ -571,5 +630,20 @@ public class UpBooks extends javax.swing.JPanel {
             return idEditorialObtenido;
         
                 
+    }
+    private String buscarEditoriales(int busqueda) {
+        String editorialName = "";
+        Editorial editorial = null;
+        try (Connection connection = App.getConnection()) {
+            EditorialDao editorialDao = App.getEditoriaDao(connection);
+//We get a connection stable here
+            editorial = editorialDao.getById(busqueda);
+            editorialName = editorial.getNombre();
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial1");
+        }
+        return editorialName;
+        
     }
 }

@@ -59,7 +59,29 @@ public class LibroDbDao implements LibroDao {
                         System.out.println("executing succesfull-concidencia");
                     }
                     
-                };
+                }
+                System.out.println("executing succesfullsi");
+            }
+        }
+        return libro.toArray(new Libro[]{});
+    }
+    
+    public Libro[] getByAutor(String autorName) throws Exception {
+        //Implementacion de metodo getById
+        ArrayList<Libro> libro = new ArrayList<>();
+        System.out.println("si entro");
+         String sql = "SELECT * FROM Libros ORDER BY autores";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+             try (ResultSet r = stmt.executeQuery()) {
+                System.out.println("executenms");
+                while (r.next()){
+              
+                    if(r.getString("autores").equals(autorName)){
+                        libro.add(toObj(r));
+                        System.out.println("executing succesfull-concidencia");
+                    }
+                    
+                }
                 System.out.println("executing succesfullsi");
             }
         }

@@ -4,6 +4,7 @@ import java.sql.*;
 import dataaccess.*;
 import java.text.SimpleDateFormat;
 import UI.Dashboard;
+import UI.Login_final;
 
 
 public class App {
@@ -116,7 +117,7 @@ public class App {
             System.out.println("ERROR " + ex.getMessage());
         }
         
-        new Dashboard().setVisible(true);
+        new Login_final().setVisible(true);
     } 
             
 }

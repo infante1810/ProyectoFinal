@@ -40,7 +40,7 @@ public class Libro {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-
+    
     public String getTipoRecurso() {
         return tipoRecurso;
     }

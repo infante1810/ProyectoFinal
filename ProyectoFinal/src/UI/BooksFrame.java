@@ -49,6 +49,8 @@ public class BooksFrame extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         btnNuevo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        button1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 430));
@@ -65,10 +67,10 @@ public class BooksFrame extends javax.swing.JPanel {
 
         jSeparator2.setForeground(new java.awt.Color(34, 184, 207));
         jSeparator2.setPreferredSize(new java.awt.Dimension(250, 10));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 620, 10));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 520, 10));
 
         bid.setForeground(new java.awt.Color(102, 102, 102));
-        bid.setText("Ingrese el nombre del libro a buscar");
+        bid.setText("Ingrese el nombre del libro o autor  a buscar");
         bid.setBorder(null);
         bid.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -78,7 +80,12 @@ public class BooksFrame extends javax.swing.JPanel {
                 bidMousePressed(evt);
             }
         });
-        add(bid, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 620, 30));
+        bid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bidActionPerformed(evt);
+            }
+        });
+        add(bid, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 520, 30));
 
         button.setBackground(new java.awt.Color(16, 152, 173));
         button.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -98,7 +105,7 @@ public class BooksFrame extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Buscar");
+        jLabel1.setText("Libro");
         button.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
 
         add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 80, 30));
@@ -230,10 +237,36 @@ public class BooksFrame extends javax.swing.JPanel {
         btnNuevo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
 
         add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 395, 80, -1));
+
+        button1.setBackground(new java.awt.Color(16, 152, 173));
+        button1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        button1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                button1MousePressed(evt);
+            }
+        });
+        button1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Autor");
+        button1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 60, -1));
+
+        add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 80, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bidMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bidMousePressed
-       if(bid.getText().equals("Ingrese el nombre del libro a buscar"))
+       if(bid.getText().equals("Ingrese el nombre del libro o autor  a buscar"))
         bid.setText("");
     }//GEN-LAST:event_bidMousePressed
 
@@ -368,12 +401,50 @@ public class BooksFrame extends javax.swing.JPanel {
          content.repaint();
     }//GEN-LAST:event_btnNuevoMousePressed
 
+    private void button1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button1MouseEntered
+
+    private void button1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button1MouseExited
+
+    private void button1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MousePressed
+        String busqueda = bid.getText();
+         buscarAutores(busqueda);
+    }//GEN-LAST:event_button1MousePressed
+
+    private void bidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bidActionPerformed
+
+    private void button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button1MouseClicked
+
    
     private void buscarLibros(String busqueda) {
         libroBusqueda = null;
         try (Connection connection = App.getConnection()) {
            LibroDao libroDao = App.getLibroDao(connection);
            libroBusqueda = libroDao.getByName(busqueda);
+        } 
+        catch (Exception ex) {
+            System.out.println("Problema cargar Editorial1");
+        }
+        try{
+            cargarTblLibrosBusqueda();
+        }
+        catch (Exception e){
+            System.out.println("Problema cargarTBLEditoriales2");
+        }
+        
+    }
+    private void buscarAutores(String busqueda) {
+        libroBusqueda = null;
+        try (Connection connection = App.getConnection()) {
+           LibroDao libroDao = App.getLibroDao(connection);
+           libroBusqueda = libroDao.getByAutor(busqueda);
         } 
         catch (Exception ex) {
             System.out.println("Problema cargar Editorial1");
@@ -454,9 +525,11 @@ public class BooksFrame extends javax.swing.JPanel {
     private javax.swing.JPanel btnEdit;
     private javax.swing.JPanel btnNuevo;
     private javax.swing.JPanel button;
+    private javax.swing.JPanel button1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;

@@ -304,6 +304,7 @@ public class Returns extends javax.swing.JPanel {
             System.out.println("ERROR " + ex.getMessage());
         }
         
+        
     }//GEN-LAST:event_buttonMousePressed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
@@ -368,7 +369,7 @@ public class Returns extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_button1MousePressed
-
+    
     private void folioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_folioActionPerformed

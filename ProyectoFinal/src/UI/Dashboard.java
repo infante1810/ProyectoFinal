@@ -20,7 +20,7 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         
-        
+       
         LocalDate now = LocalDate.now();
         int year = now.getYear();
         int dia = now.getDayOfMonth();
@@ -32,11 +32,15 @@ public class Dashboard extends javax.swing.JFrame {
         Principal p1 = new Principal();
         p1.setSize(750, 430);
         p1.setLocation(0,0);
+        login l1 = new login();
+        
         
         content.removeAll();
         content.add(p1, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
+        
+        
     }
 
     /**
@@ -496,6 +500,7 @@ public class Dashboard extends javax.swing.JFrame {
         content.add(p1, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
+        
     }//GEN-LAST:event_btn_usersMousePressed
 
     private void btn_booksMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_booksMousePressed
